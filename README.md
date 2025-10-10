@@ -1,2 +1,2 @@
-# Welcome to PIKAA ![PIKAA logo](/media/pikaa.png "PIKAA"){width=300 height=200}
+# Welcome to PIKAA <img src="/media/pikaa.png" alt="PIKAA logo">
 An open-source website for song listings.
