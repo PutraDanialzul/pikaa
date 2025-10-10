@@ -1,4 +1,5 @@
 body{
     background-color: black;
-    color: lime
+    color: lime;
+    border: 2px double cyan;
 }
