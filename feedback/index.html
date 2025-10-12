@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PIKAA - The Song Listing Site!</title>
+        <meta name="description" content="Send a feedback to PIKAA.">
+        <meta name="keywords" content="songs, music, media, listing">
+        <meta name="title" content="Send Feedback - PIKAA">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="/styles.css">
+        <!-- External JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <img src="/media/pikaa.png" alt="PIKAA Logo" width="200">
+        <h1>Send a feedback to PIKAA!</h1>
+        <p>Tell us if you have an unlisted song in mind, or just want to update some inaccurate information from our site!</p>
+        <p>(Or even if you just want someone to talk to.) </p>
+        <form class="formcarryForm" action="https://formcarry.com/s/uv9oeOhe7hR" method="POST" enctype="multipart/form-data">
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Your Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Your Message:</label><br>
+            <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <br>
+        <p>Or just <a href="/">go back</a> if you want. </p>
+        
+    <!-- REQUIRED FOR JQUERY -->
+    <script>
+      $(function(){
+        $(".formcarryForm").submit(function(e){
+          e.preventDefault();
+          var href = $(this).attr("action");
+          
+          $.ajax({
+              type: "POST",
+              url: href,
+              data: new FormData(this),
+	            dataType: "json",
+	            processData: false,
+	            contentType: false,
+              success: function(response){
+                if(response.status == "success"){
+                    alert("We received your submission, thank you!");
+                }
+                else if(response.code === 422){
+                  alert("Field validation failed");
+                  $.each(response.errors, function(key) {
+                    $('[name="' + key + '"]').addClass('formcarry-field-error');
+                  });
+                }
+                else{
+                  alert("An error occured: " + response.message);
+                }
+              },
+              error: function(jqXHR, textStatus){
+                const errorObject = jqXHR.responseJSON
+
+                alert("Request failed, " + errorObject.title + ": " + errorObject.message);
+              },
+              complete: function(){
+                // This will be fired after request is complete whether it's successful or not.
+                // Use this block to run some code after request is complete.
+              }
+          });
+        });
+      });
+    </script>
+    </body>
+</html>
