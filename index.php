@@ -15,5 +15,8 @@
         <h1>Welcome to PIKAA!</h1>
         <h2>A song listing site for convenience!</h2>
         <a href="/test/">Go to the testing page</a>
+        <?php
+            echo "<h3>Hello World!</h3>"
+        ?>
     </body>    
 </html>
