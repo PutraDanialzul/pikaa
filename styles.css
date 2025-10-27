@@ -7,3 +7,16 @@ body{
 .pikaa{
     width: 200;
 }
+
+a:link {
+color: orange; /* Unvisited link */
+}
+a:visited {
+color: goldenrod; /* Visited link */
+}
+a:hover {
+color: gold; /* Mouse over link */
+}
+a:active {
+color: orangered; /* Selected link */
+}
