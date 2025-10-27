@@ -1,0 +1,33 @@
+{
+    "songs": [
+        {
+            "title": "Imagine",
+            "artist": "John Lennon",
+            "language": "English",
+            "album": "Imagine",
+            "genre": ["Rock"]
+        },
+        {
+            "title": "Billie Jean",
+            "artist": "Michael Jackson",
+            "album": "Thriller",
+            "language": "English",
+            "genre": ["Pop"]
+        },
+        {
+            "id": "never_gonna_give_you_up-rick_astley",
+            "title": "Never Gonna Give You Up",
+            "artist": "Rick Astley",
+            "album": "Whenever You Need Somebody",
+            "language": "English",
+            "genre": ["Pop"]
+        },
+        {
+            "title": "Bohemian Rhapsody",
+            "artist": "Queen",
+            "album": "A Night at the Opera",
+            "language": "English",
+            "genre": ["Rock"]
+        }
+    ]
+}
