@@ -1,47 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>Song Info</title>
+        <link rel="stylesheet" href="/styles.css">
     </head>
     <body>
-        
-        <script>
-            const urlParams = new URLSearchParams(window.location.search);
-            var songId = urlParams.get('q');
-            if (songId) {
-                fetch('songs.json').then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok. Unable to fetch songs list.');
-                    }
-                    return response.json(); // Parse JSON data
-                }).then(data => {
-                    console.log(data.songs);
-                    const song = data.songs.find(s => s.id == songId);
-                    if (!song) {
-                        throw new Error('Song not found in the songs list.');//TODO: Shows error if song not found
-                    }
-                    return fetch(`/songs/${songId}/lyrics.txt`);
-                }).then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok. Unable to fetch lyrics.');
-                    }
-                    return response.text(); // Parse text data
-                }).then(data => {
-
-                }).catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-                fetch(`/songs/${songId}/details.json`).then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok. Unable to fetch song details.');
-                    }
-                    return response.json(); // Parse JSON data
-                }).then(data => {
-
-                }).catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-            }
-        </script>
+        <h1 id="song-title">song-title</h1>
+        <h2 id="song-artist">song-artist</h2>
+        <h2 id="song-language">song-language</h2>
+        <h2 id="song-genre">song-genre</h2>
+        <p id="song-lyrics">song-lyrics</p>
+        <a href="/songs/">Go Back</a>
+        <script src="info.js"></script>
     </body>
 </html>

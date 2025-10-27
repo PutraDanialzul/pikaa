@@ -1,20 +1,6 @@
 {
     "songs": [
         {
-            "title": "Imagine",
-            "artist": "John Lennon",
-            "language": "English",
-            "album": "Imagine",
-            "genre": ["Rock"]
-        },
-        {
-            "title": "Billie Jean",
-            "artist": "Michael Jackson",
-            "album": "Thriller",
-            "language": "English",
-            "genre": ["Pop"]
-        },
-        {
             "id": "never_gonna_give_you_up-rick_astley",
             "title": "Never Gonna Give You Up",
             "artist": "Rick Astley",
@@ -23,6 +9,7 @@
             "genre": ["Pop"]
         },
         {
+            "id": "bohemian_rhapsody-queen",
             "title": "Bohemian Rhapsody",
             "artist": "Queen",
             "album": "A Night at the Opera",
