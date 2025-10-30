@@ -1,21 +1,54 @@
 body{
-    background-color: black;
-    color: lime;
-    border: 2px double cyan;
+    background-color: rgb(1, 1, 19);
+    color: rgb(233, 235, 240);
+    border: 2px double rgb(5, 100, 100);
+    background: linear-gradient(135deg, #010103, #010343);
+}
+.container{
+    text-align: center;
+    padding-top: 100px;
+}
+.links a {
+    display: inline-block;
+    margin: 10px 15px;
+    text-decoration: none;
+    color: #051013;
+    font-weight: bold;
+    transition: color 0.3s, transform 0.3s;
 }
 
+.h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: rgb(226, 225, 214);
+}
+
+.h2{
+  font-weight: 400;
+  color: #cccccc;
+  margin-bottom: 30px;  
+}
 .pikaa{
     width: 200;
 }
 
+.footer{
+    margin-top: 80px;
+    color: #888;
+    font-size: 0.9em;
+}
+
 a:link {
-color: orange; /* Unvisited link */
+color: rgb(165, 138, 138); /* Unvisited link */
+
 }
 a:visited {
-color: goldenrod; /* Visited link */
+color: rgb(132, 129, 220); /* Visited link */
 }
 a:hover {
-color: gold; /* Mouse over link */
+color: rgb(105, 185, 213); /* Mouse over link */
+transform: scale(1.05);
+padding: 10px, 20px;
 }
 a:active {
 color: orangered; /* Selected link */
