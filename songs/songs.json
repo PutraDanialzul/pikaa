@@ -15,6 +15,22 @@
             "album": "A Night at the Opera",
             "language": "English",
             "genre": ["Rock"]
+        },
+        {
+            "id": "dealova-once_mekel",
+            "title": "Dealova",
+            "artist": "Once Mekel",
+            "album": "Dealova Single",
+            "language": "Indonesian",
+            "genre": ["Pop", "Rock"]
+        },
+        {
+            "id": "welcome_to_the_black_parade-my_chemical_romance",
+            "title": "Welcome to the Black Parade",
+            "artist": "My Chemical Romance",
+            "album": "The Black Parade",
+            "language": "English",
+            "genre": ["Alternative Rock", "Emo"]
         }
     ]
 }
