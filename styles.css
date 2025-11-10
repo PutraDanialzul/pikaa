@@ -53,13 +53,6 @@ transform: scale(1.05);
 padding: 10px, 20px;
 }
 a:active {
-<<<<<<< HEAD
-color: orangered; /* Selected link */
-}
-#movie {
-			text-align:center;
-		}
-=======
 color: rgb(68, 216, 202); /* Selected link */
 }
 
@@ -79,4 +72,3 @@ color: rgb(68, 216, 202); /* Selected link */
 a:link{
 color: rgb(228, 220, 225);
 }
->>>>>>> 1e68ef6a1e3c82194fb2c1dc2dfa7636c67b4adf
