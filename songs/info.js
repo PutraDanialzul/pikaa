@@ -15,7 +15,9 @@ const urlParams = new URLSearchParams(window.location.search);
             document.getElementById('song-title').innerText = song.title;
             document.getElementById('song-artist').innerText = song.artist;
             document.getElementById('song-language').innerText = song.language;
-            document.getElementById('song-genre').innerText = song.genre; 
+            document.getElementById('song-genre').innerText = song.genre;
+            document.getElementById('song-cover').setAttribute("src", song.coverImg); 
+            document.getElementById('song-video').setAttribute("src", song.video); 
             return fetch(`/songs/${songId}/lyrics.txt`);
         }).then(response => {
             if (!response.ok) {

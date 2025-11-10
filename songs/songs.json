@@ -6,7 +6,9 @@
             "artist": "Rick Astley",
             "album": "Whenever You Need Somebody",
             "language": "English",
-            "genre": ["Pop"]
+            "genre": ["Pop"],
+            "coverImg": "https://upload.wikimedia.org/wikipedia/en/3/34/RickAstleyNeverGonnaGiveYouUp7InchSingleCover.jpg",
+            "video": "https://www.youtube.com/embed/dQw4w9WgXcQ?list=RDdQw4w9WgXcQ"
         },
         {
             "id": "bohemian_rhapsody-queen",
@@ -14,23 +16,40 @@
             "artist": "Queen",
             "album": "A Night at the Opera",
             "language": "English",
-            "genre": ["Rock"]
+            "genre": ["Rock"],
+            "coverImg": "",
+            "video": ""
+            
         },
-        {
+        {   
             "id": "dealova-once_mekel",
             "title": "Dealova",
             "artist": "Once Mekel",
             "album": "Dealova Single",
             "language": "Indonesian",
-            "genre": ["Pop", "Rock"]
+            "genre": ["Pop", "Rock"],
+            "coverImg": "",
+            "video": ""
         },
         {
-            "id": "welcome_to_the_black_parade-my_chemical_romance",
-            "title": "Welcome to the Black Parade",
+            "id": "the_world_is_ugly-my_chemical_romance",
+            "title": "The World Is Ugly",
             "artist": "My Chemical Romance",
-            "album": "The Black Parade",
+            "album": "Conventional Weapon",
             "language": "English",
-            "genre": ["Alternative Rock", "Emo"]
+            "genre": ["Alternative Rock", "Emo"],
+            "coverImg": "",
+            "video": ""
+        },
+        {
+            "id": "eien_no_akuruhi-ado",
+            "title": "Eien No Akuruhi",
+            "artist": "Ado",
+            "album": "Single Release",
+            "language": "Japanese",
+            "genre": ["Pop", "J-Pop"],
+            "coverImg": "",
+            "video": ""
         }
     ]
 }
