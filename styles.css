@@ -2,6 +2,7 @@ body{
     background-color: rgb(1, 1, 19);
     color: rgb(233, 235, 240);
     border: 2px double rgb(5, 100, 100);
+    min-height: 100vh;
     background: linear-gradient(135deg, #010103, #010343);
 }
 .container{
@@ -26,24 +27,25 @@ body{
 .h2{
   font-weight: 400;
   color: #cccccc;
-  margin-bottom: 30px;  
 }
 .pikaa{
     width: 200;
 }
 
 .footer{
-    margin-top: 80px;
+    margin-top: 150px;
     color: #888;
     font-size: 0.9em;
+    position: fixed;
+    width: 100%;
 }
 
 a:link {
-color: rgb(165, 138, 138); /* Unvisited link */
+color: rgb(161, 98, 139); /* Unvisited link */
 
 }
 a:visited {
-color: rgb(132, 129, 220); /* Visited link */
+color: rgb(121, 118, 203); /* Visited link */
 }
 a:hover {
 color: rgb(105, 185, 213); /* Mouse over link */
@@ -51,5 +53,22 @@ transform: scale(1.05);
 padding: 10px, 20px;
 }
 a:active {
-color: orangered; /* Selected link */
+color: rgb(68, 216, 202); /* Selected link */
+}
+
+.logo{
+    display: block;
+    margin: auto;
+    text-align: center;
+    max-width: 180px;
+    cursor: pointer;
+    transition: opacity 0.8s ease-in-out;
+}
+.logo:hover{
+    opacity: 0.5;
+    transform:scale(1.10) ;
+}
+
+a:link{
+color: rgb(228, 220, 225);
 }
