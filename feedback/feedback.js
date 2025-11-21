@@ -14,7 +14,7 @@ $(function(){
             success: function(response){
                 if(response.status == "success"){
                     //alert("We received your submission, thank you!");
-                    window.location.replace("/feedback/thank");
+                    window.location.replace("/feedback/thank.html");
                 }
                 else if(response.code === 422){
                     alert("Field validation failed");
