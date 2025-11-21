@@ -3,18 +3,19 @@ $(function(){
     $(".formcarryForm").submit(function(e){
         e.preventDefault();
         var href = $(this).attr("action");
-          
+        $formData = new FormData(this);
+        alert($formData);
         $.ajax({
             type: "POST",
             url: href,
-            data: new FormData(this),
+            data: $formData,
             dataType: "json",
             processData: false,
             contentType: false,
             success: function(response){
                 if(response.status == "success"){
                     //alert("We received your submission, thank you!");
-                    window.location.replace("/feedback/thank.html");
+                    window.location.replace("/feedback/thank");
                 }
                 else if(response.code === 422){
                     alert("Field validation failed");
