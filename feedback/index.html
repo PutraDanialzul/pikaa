@@ -17,7 +17,7 @@
         <h1>Send a feedback to PIKAA!</h1>
         <p>Tell us if you have an unlisted song in mind, or just want to update some inaccurate information from our site!</p>
         <p>(Or even if you just want someone to talk to.) </p>
-        <form class="formcarryForm" action="https://formcarry.com/s/uv9oeOhe7hR" method="POST" enctype="multipart/form-data">
+        <form id="formcarryForm" action="https://formcarry.com/s/uv9oeOhe7hR" method="POST" enctype="multipart/form-data">
             <label for="name">Your Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
             <label>Your Gender: </label><br>
@@ -37,7 +37,7 @@
             </select><br><br>
             <label for="feedback">Your Feedback:</label><br>
             <textarea id="feedback" name="feedback" rows="4" cols="30" required></textarea><br><br>
-            <input type="submit" value="Submit">
+            <button type="submit" id="submitButton">Submit</button>
         </form>
         <br>
         <p>Or just <a href="/">go back</a> if you want. </p>
