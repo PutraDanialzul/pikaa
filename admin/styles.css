@@ -76,3 +76,17 @@ input[type="submit"]:hover {
     box-shadow: 0 0 12px rgba(0,0,0,0.4);
     animation: fadeIn 0.6s ease;
 }
+
+#logged-in-logo{
+    display: block;
+    width: 200px;
+}
+
+@keyframes log-in-logo{
+    from{
+        width: 400px;
+    }
+    to{
+        width: 200px;
+    }
+}

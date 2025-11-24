@@ -1,4 +1,5 @@
 <?php
+    $loggedIn = false;
     if(isset($_POST["secret"]))
         $admin_secret = $_POST["secret"];
 ?>
@@ -28,8 +29,12 @@
                         echo "<p>Error: Wrong key.</p>";
                         echo "</div>";
                     }
+                    else{ 
+                        $loggedIn = true;
+                    }
                 }
             }
+            if(!$loggedIn){
         ?>
         <img id="logo" src="/media/pikaa.png" alt="pikaa logo">
         <div id="form-area">
@@ -39,5 +44,14 @@
                 <input type="submit">
             </form>
         </div>
+        <?php
+            }
+            else{
+        ?>
+        <img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo">
+        <!-- TODO: create logged in admin page -->
+        <?php
+            }
+        ?>
     </body>
 </html>
