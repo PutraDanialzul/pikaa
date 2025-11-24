@@ -6,9 +6,38 @@
 <html>
     <head>
         <title>Admin Page - PIKAA</title>
-        <link rel="stylesheet" src="style.css">
+        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <?php
+            if(isset($admin_secret)){
+                $dbServername = "localhost";
+                $dbUsername = "root";
+                $dbPassword = "";
+                $dbName = "pikaa";
+                $connection = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
+                if($connection->connect_error){
+                    die("Error: Connection failed. ".$connection->connect_error);
+                }
+                else{
+                    $searchQuery = "SELECT * FROM admin WHERE ADMIN_SECRET = '$admin_secret'";
+                    $result = $connection->query($searchQuery);
+                    if($result->num_rows < 1){
+                        echo "<div id=\"error-panel\">";
+                        echo "<p>Error: Wrong key.</p>";
+                        echo "</div>";
+                    }
+                }
+            }
+        ?>
         <img id="logo" src="/media/pikaa.png" alt="pikaa logo">
+        <div id="form-area">
+            <form method="POST">
+                <label for="secret-input">Please enter your secret key. </label>
+                <input type="password" name="secret" id="secret-input">
+                <input type="submit">
+            </form>
+        </div>
     </body>
 </html>
