@@ -36,15 +36,17 @@
             }
             if(!$loggedIn){
         ?>
-        <div style="margin: 0 auto; width: fit-content; height: fit-content;">
-            <a href="/" style="width: fit-content; height: fit-content;"><img id="logo" src="/media/pikaa.png" alt="pikaa logo"></a>
-        </div>
-        <div id="form-area">
-            <form method="POST">
-                <label for="secret-input">Please enter your secret key. </label>
-                <input type="password" name="secret" id="secret-input">
-                <input type="submit">
-            </form>
+        <div id="logged-out-container">
+            <div style="margin: 100px auto; width: fit-content; height: fit-content; flex: 1;">
+                <a href="/" style="width: fit-content; height: fit-content;"><img id="logo" src="/media/pikaa.png" alt="pikaa logo"></a>
+            </div>
+            <div id="form-area" style="flex: 2;">
+                <form method="POST">
+                    <label for="secret-input">Please enter your secret key. </label>
+                    <input type="password" name="secret" id="secret-input">
+                    <input type="submit">
+                </form>
+            </div>
         </div>
         <?php
             }

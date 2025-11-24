@@ -18,6 +18,12 @@
     }
 }
 
+#logged-out-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #form-area{
     background: rgba(255, 255, 255, 0.06);
     padding: 35px 45px;
