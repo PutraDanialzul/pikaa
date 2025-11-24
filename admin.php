@@ -36,7 +36,9 @@
             }
             if(!$loggedIn){
         ?>
-        <img id="logo" src="/media/pikaa.png" alt="pikaa logo">
+        <div style="margin: 0 auto; width: fit-content; height: fit-content;">
+            <a href="/" style="width: fit-content; height: fit-content;"><img id="logo" src="/media/pikaa.png" alt="pikaa logo"></a>
+        </div>
         <div id="form-area">
             <form method="POST">
                 <label for="secret-input">Please enter your secret key. </label>
@@ -50,9 +52,9 @@
         ?>
         <img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo">
         <!-- TODO: create logged in admin page -->
-        <script src="admin-scripts.js"></script>
         <?php
             }
         ?>
+        <script src="admin-scripts.js"></script>
     </body>
 </html>
