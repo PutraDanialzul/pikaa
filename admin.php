@@ -8,7 +8,7 @@
     <head>
         <title>Admin Page - PIKAA</title>
         <link rel="stylesheet" href="/styles.css">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="admin-styles.css">
     </head>
     <body>
         <?php
@@ -50,6 +50,7 @@
         ?>
         <img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo">
         <!-- TODO: create logged in admin page -->
+        <script src="admin-scripts.js"></script>
         <?php
             }
         ?>
