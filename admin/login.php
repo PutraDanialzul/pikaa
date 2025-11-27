@@ -57,7 +57,7 @@
             }
             else{
         ?>
-        <script>window.location.href = "index"</script>
+        <script>window.location.href = ""</script>
         <?php
             }
         ?>
