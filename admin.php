@@ -1,6 +1,9 @@
 <?php
+    session_start();
     $loggedIn = false;
-    if(isset($_POST["secret"]))
+    if(isset($_SESSION["secret"]))
+        $admin_secret = $_SESSION["secret"];
+    else if(isset($_POST["secret"]))
         $admin_secret = $_POST["secret"];
 ?>
 <!DOCTYPE html>
@@ -30,6 +33,7 @@
                         echo "</div>";
                     }
                     else{ 
+                        $_SESSION["secret"] = $admin_secret;
                         $loggedIn = true;
                     }
                 }
@@ -54,7 +58,9 @@
         ?>
         <img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo">
         <!-- TODO: create logged in admin page -->
+        
         <?php
+            var_dump($_GET);
             }
         ?>
         <script src="admin-scripts.js"></script>
