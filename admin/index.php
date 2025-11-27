@@ -71,49 +71,59 @@ function logOut(){
             <div id="main-header">
                 <h1>
                     <?php
-                        switch($_GET["view"] ?? ""){
+                    if(isset($_GET["view"])){
+                        switch($_GET["view"]){
                             case "songs": echo "Songs List"; break;
                             case "feedbacks": echo "Feedback Messages"; break;
                             case "secrets": echo "Secret Keys"; break;
-                            default: echo "Admin Dashboard"; break;
                         }
+                    }
+                    else echo "Admin Dashboard";
                     ?>
                 </h1>
-
-                <form method="GET" id="search-bar">
-                    <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
-                    <input type="text" name="search" placeholder="Search..." required>
-                    <button type="submit">Search</button>
-                </form>
+                <?php if(isset($_GET["view"])){ ?>
+                    <form method="GET" id="search-bar">
+                        <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
+                        <input type="text" name="search" placeholder="Search..." required>
+                        <button type="submit">Search</button>
+                    </form>
+                <?php } ?>
             </div>
-                    
-            <div id="section-list-container">
-                <div class="list-item">
-                    <div class="list-item-left">
-                        <h3>Item Title</h3>
-                        <p>Small description preview of the content...</p>
-                    </div>
-                    <div class="list-item-right">
-                        <span class="list-item-date">Jan 22, 2025</span>
-                        <button class="object-view-button">View</button>
+            <?php if(isset($_GET["view"])){ ?>
+                <div id="section-list-container">
+                    <div class="list-item">
+                        <div class="list-item-left">
+                            <h3>Item Title</h3>
+                            <p>Small description preview of the content...</p>
+                        </div>
+                        <div class="list-item-right">
+                            <span class="list-item-date">Jan 22, 2025</span>
+                            <button class="object-view-button">View</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <footer id="footer-pagination">
-            <?php 
-            for($i = 1; $i <= 10; $i++){ 
-            ?>
-                <a class="page-link" href="<?php echo "index?view=".$_GET["view"]."&page=".$i; ?>"><?php echo $i; ?></a>
             <?php
-            } 
+            } else{
             ?>
+            <p>This admin dashboard is used to check all of the feedback submissions from users. Song entries can also be edited using this page. Same goes to the secret key entries. </p>
+            <?php } ?>
+        </section>
+        <?php if(isset($_GET["view"])){ ?>
+            <footer id="footer-pagination">
+                <?php 
+                for($i = 1; $i <= 10; $i++){ 
+                ?>
+                    <a class="page-link" href="<?php echo "index?view=".$_GET["view"]."&page=".$i; ?>"><?php echo $i; ?></a>
+                <?php
+                } 
+                ?>
 
-            <form method="GET">
-                <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
-                <input id="page-input" type="number" name="page" min="1" placeholder="Page" required>
-                <button id="page-submin-button" type="submit">Go</button>
-            </form>
-        </footer>
+                <form method="GET">
+                    <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
+                    <input id="page-input" type="number" name="page" min="1" placeholder="Page" required>
+                    <button id="page-submin-button" type="submit">Go</button>
+                </form>
+            </footer>
+        <?php } ?>
     </body>
 </html>
