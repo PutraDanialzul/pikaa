@@ -1,14 +1,18 @@
-<?php
-    $loggedIn = false;
-    if(isset($_POST["secret"]))
-        $admin_secret = $_POST["secret"];
-?>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin Page - PIKAA</title>
+        <title>Admin Login - PIKAA</title>
         <link rel="stylesheet" href="/styles.css">
-        <link rel="stylesheet" href="admin-styles.css">
+        <link rel="stylesheet" href="styles.css">
+        <?php
+        session_start();
+        $loggedIn = false;
+        if(isset($_SESSION["secret"]))
+            $admin_secret = $_SESSION["secret"];
+        else if(isset($_POST["secret"]))
+            $admin_secret = $_POST["secret"];
+        ?>
     </head>
     <body>
         <?php
@@ -30,6 +34,7 @@
                         echo "</div>";
                     }
                     else{ 
+                        $_SESSION["secret"] = $admin_secret;
                         $loggedIn = true;
                     }
                 }
@@ -52,11 +57,9 @@
             }
             else{
         ?>
-        <img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo">
-        <!-- TODO: create logged in admin page -->
+        <script>window.location.href = ""</script>
         <?php
             }
         ?>
-        <script src="admin-scripts.js"></script>
     </body>
 </html>
