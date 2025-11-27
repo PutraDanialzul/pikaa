@@ -222,6 +222,7 @@ input[type="submit"]:hover {
 .list-item {
     display: flex;
     justify-content: space-between;
+    margin: 10px;
     padding: 18px 20px;
 }
 
@@ -246,12 +247,12 @@ input[type="submit"]:hover {
     align-items: flex-end;
 }
 
-.list-item-date {
+.list-item-right-info {
     color: #6b7280;
     font-size: 14px;
 }
 
-.object-view-button {
+#object-view-button {
     margin-top: 8px;
     padding: 8px 14px;
     background: #2563eb;
@@ -261,7 +262,7 @@ input[type="submit"]:hover {
     cursor: pointer;
 }
 
-.object-view-button:hover {
+#object-view-button:hover {
     background: #1d4ed8;
 }
 

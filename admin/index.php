@@ -1,5 +1,8 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT']."/dbInfo.php";
 $current_secret = "";
+$pageCount = 1;
+$contentPerPage = 5;
 session_start();
 function logOut(){
     session_destroy();
@@ -19,16 +22,12 @@ function logOut(){
         if(!isset($_SESSION["secret"])) logOut();
         else{
             $admin_secret = $_SESSION["secret"];
-            $dbServername = "localhost";
-            $dbUsername = "root";
-            $dbPassword = "";
-            $dbName = "pikaa";
             $connection = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
             if($connection->connect_error){
                 die("Error: Connection failed. ".$connection->connect_error);
             }
             else{
-                $searchQuery = "SELECT * FROM admin WHERE ADMIN_SECRET = '$admin_secret'";
+                $searchQuery = "SELECT ADMIN_SECRET FROM admin WHERE ADMIN_SECRET = '$admin_secret'";
                 $result = $connection->query($searchQuery);
                 if($result->num_rows < 1){
                     logOut();
@@ -36,14 +35,6 @@ function logOut(){
                 else $current_secret = $admin_secret;
             }
         }
-        //if(!isset($_GET["view"])){
-        //    header("Location: index?view=songs");
-        //    exit();
-        //}
-        //else if($_GET["view"] != "songs" && $_GET["view"] != "feedbacks" && $_GET["view"] != "secrets"){
-        //    header("Location: index?view=songs");
-        //    exit();
-        //}
         ?>
     </head>
     <body>
@@ -90,18 +81,73 @@ function logOut(){
                 <?php } ?>
             </div>
             <?php if(isset($_GET["view"])){ ?>
-                <div id="section-list-container">
-                    <div class="list-item">
-                        <div class="list-item-left">
-                            <h3>Item Title</h3>
-                            <p>Small description preview of the content...</p>
-                        </div>
-                        <div class="list-item-right">
-                            <span class="list-item-date">Jan 22, 2025</span>
-                            <button class="object-view-button">View</button>
-                        </div>
+            <div id="section-list-container">
+                <?php function addListRow(string $title, string $description, string $rightInformation, int $id){ ?>
+                <div class="list-item">
+                    <div class="list-item-left">
+                        <h3><?php echo $title; ?></h3>
+                        <p><?php echo $description; ?></p>
+                    </div>
+                    <div class="list-item-right">
+                        <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
+                        <form method="GET">
+                            <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <input type="submit" id="object-view-button" value="View">
+                        </form>
                     </div>
                 </div>
+                <?php } ?>
+                <?php function addCreateObjectRow(string $title, string $description, string $rightInformation){ ?>
+                <div class="list-item">
+                    <div class="list-item-left">
+                        <h3><?php echo $title; ?></h3>
+                        <p><?php echo $description; ?></p>
+                    </div>
+                    <div class="list-item-right">
+                        <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
+                        <form method="GET">
+                            <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
+                            <input type="hidden" name="action" value="create">
+                            <input type="submit" id="object-view-button" value="Create">
+                        </form>
+                    </div>
+                </div>
+                <?php } ?>
+                <?php
+                $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
+                switch($_GET["view"]){
+                    case "songs":
+                        addCreateObjectRow("Add a new song to the list", "A new song to be available for users to listen.", "");
+                        break;
+                    case "feedbacks":
+                        $searchQuery = "SELECT SENDER_NAME, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback;";
+                        $result = $connection->query($searchQuery);
+                        $pageCount = ceil($result->num_rows/$contentPerPage);
+                        for($i = $page - 1; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                            $row = $result->fetch_all()[$i];
+                            $desc = $row[1];
+                            if(strlen($desc) > 75)
+                                $desc = substr($desc, 0, 75)."...";
+                            addListRow($row[0], $desc, $row[2], $row[3]);
+                        }
+                        break;
+                    case "secrets":
+                        addCreateObjectRow("Create a new secret key", "Secret keys are used to open the admin dashboard. ", "");
+                        $searchQuery = "SELECT SECRET_ID, ADMIN_SECRET FROM admin;";
+                        $result = $connection->query($searchQuery);
+                        $pageCount = ceil($result->num_rows/$contentPerPage);
+                        for($i = $page - 1; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                            $row = $result->fetch_all()[$i];
+                            $desc = $row[1];
+                            if(strlen($desc) > 75)
+                                $desc = substr($desc, 0, 75)."...";
+                            addListRow($row[0], $desc, "", $row[0]);
+                        }
+                        break;
+                }
+                ?>
+            </div>
             <?php
             } else{
             ?>
@@ -111,9 +157,9 @@ function logOut(){
         <?php if(isset($_GET["view"])){ ?>
             <footer id="footer-pagination">
                 <?php 
-                for($i = 1; $i <= 10; $i++){ 
+                for($i = 1; $i <= min($pageCount, 10); $i++){ 
                 ?>
-                    <a class="page-link" href="<?php echo "index?view=".$_GET["view"]."&page=".$i; ?>"><?php echo $i; ?></a>
+                    <a class="page-link" href="<?php echo "index?view=".$_GET["view"]."&page=".($i <= 5 ? $i : $pageCount-10+$i); ?>"><?php echo $i <= 5 ? $i : $pageCount-10+$i;; ?></a>
                 <?php
                 } 
                 ?>

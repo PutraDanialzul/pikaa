@@ -6,11 +6,14 @@
         <link rel="stylesheet" href="/styles.css">
         <link rel="stylesheet" href="styles.css">
         <?php
+        require $_SERVER['DOCUMENT_ROOT']."/dbInfo.php";
         session_start();
-        $loggedIn = false;
-        if(isset($_SESSION["secret"]))
-            $admin_secret = $_SESSION["secret"];
-        else if(isset($_POST["secret"]))
+        function logIn($secret){
+            $_SESSION["secret"] = $secret;
+            header("Location: index");
+            exit();
+        }
+        if(isset($_POST["secret"]))
             $admin_secret = $_POST["secret"];
         ?>
     </head>
@@ -26,24 +29,26 @@
         ?>
         <?php
             if(isset($admin_secret)){
-                $dbServername = "localhost";
-                $dbUsername = "root";
-                $dbPassword = "";
-                $dbName = "pikaa";
                 $connection = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);
                 if($connection->connect_error){
                     die("Error: Connection failed. ".$connection->connect_error);
                 }
                 else{
-                    $searchQuery = "SELECT * FROM admin WHERE ADMIN_SECRET = '$admin_secret'";
+                    $searchQuery = "SELECT ADMIN_SECRET FROM admin";
                     $result = $connection->query($searchQuery);
                     if($result->num_rows < 1){
-                        wrongKey();
+                        logIn($admin_secret);
                     }
-                    else{ 
-                        $_SESSION["secret"] = $admin_secret;
-                        header("Location: index");
-                        exit();
+                    else{
+                        foreach($result->fetch_all() as $row){
+                            var_dump($row[0]);
+                            var_dump($admin_secret);
+                            if($admin_secret == $row[0]){
+                                logIn($admin_secret);
+                                exit();
+                            }
+                        }
+                        wrongKey();
                     }
                 }
             }
