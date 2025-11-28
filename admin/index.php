@@ -265,7 +265,7 @@ function logOut(){
                 <form method="GET">
                     <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
                     <input id="page-input" type="number" name="page" min="1" max="<?php echo $pageCount ?>" placeholder="Page" required>
-                    <button id="page-submin-button" type="submit">Go</button>
+                    <button id="page-submit-button" type="submit">Go</button>
                 </form>
             </footer>
         <?php } ?>
