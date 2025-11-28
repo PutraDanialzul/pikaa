@@ -40,7 +40,7 @@ function logOut(){
     <body>
         <header id="topbar">
             <div id="logo-area">
-                <a href="/"><img src="/media/pikaa.png" alt="pikaa logo"></a>
+                <a href="/"><img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo"></a>
             </div>
 
             <div id="topbar-actions">
@@ -64,9 +64,9 @@ function logOut(){
                     <?php
                     if(isset($_GET["view"])){
                         switch($_GET["view"]){
-                            case "songs": echo "Songs List"; break;
-                            case "feedbacks": echo "Feedback Messages"; break;
-                            case "secrets": echo "Secret Keys"; break;
+                            case "songs": echo isset($_GET["id"]) ? "Song Editing: ".$_GET["id"] : "Songs List"; break;
+                            case "feedbacks": echo isset($_GET["id"]) ? "Feedback Reviewing: ".$_GET["id"] : "Feedback Messages"; break;
+                            case "secrets": echo isset($_GET["id"]) ? "Secret Key Editing: ".$_GET["id"] : "Secret Keys"; break;
                         }
                     }
                     else echo "Admin Dashboard";
@@ -81,73 +81,135 @@ function logOut(){
                 <?php } ?>
             </div>
             <?php if(isset($_GET["view"])){ ?>
-            <div id="section-list-container">
-                <?php function addListRow(string $title, string $description, string $rightInformation, int $id){ ?>
-                <div class="list-item">
-                    <div class="list-item-left">
-                        <h3><?php echo $title; ?></h3>
-                        <p><?php echo $description; ?></p>
-                    </div>
-                    <div class="list-item-right">
-                        <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
-                        <form method="GET">
-                            <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
-                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-                            <input type="submit" id="object-view-button" value="View">
-                        </form>
-                    </div>
-                </div>
-                <?php } ?>
-                <?php function addCreateObjectRow(string $title, string $description, string $rightInformation){ ?>
-                <div class="list-item">
-                    <div class="list-item-left">
-                        <h3><?php echo $title; ?></h3>
-                        <p><?php echo $description; ?></p>
-                    </div>
-                    <div class="list-item-right">
-                        <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
-                        <form method="GET">
-                            <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
-                            <input type="hidden" name="action" value="create">
-                            <input type="submit" id="object-view-button" value="Create">
-                        </form>
-                    </div>
-                </div>
-                <?php } ?>
-                <?php
-                $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
-                switch($_GET["view"]){
-                    case "songs":
-                        addCreateObjectRow("Add a new song to the list", "A new song to be available for users to listen.", "");
-                        break;
-                    case "feedbacks":
-                        $searchQuery = "SELECT SENDER_NAME, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback;";
-                        $result = $connection->query($searchQuery);
-                        $pageCount = ceil($result->num_rows/$contentPerPage);
-                        for($i = $page - 1; $i < min($result->num_rows, $page*$contentPerPage); $i++){
-                            $row = $result->fetch_all()[$i];
-                            $desc = $row[1];
-                            if(strlen($desc) > 75)
-                                $desc = substr($desc, 0, 75)."...";
-                            addListRow($row[0], $desc, $row[2], $row[3]);
+                <?php if(!isset($_GET["id"])){ ?>
+                    <div id="section-list-container">
+                        <?php function addListRow(string $title, string $description, string $rightInformation, int $id){ ?>
+                        <div class="list-item">
+                            <div class="list-item-left">
+                                <h3><?php echo $title; ?></h3>
+                                <p><?php echo $description; ?></p>
+                            </div>
+                            <div class="list-item-right">
+                                <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
+                                <form method="GET">
+                                    <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                    <input type="submit" class="object-view-button" value="View">
+                                </form>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <?php function addCreateObjectRow(string $title, string $description, string $rightInformation){ ?>
+                        <div class="list-item">
+                            <div class="list-item-left">
+                                <h3><?php echo $title; ?></h3>
+                                <p><?php echo $description; ?></p>
+                            </div>
+                            <div class="list-item-right">
+                                <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
+                                <form method="GET">
+                                    <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
+                                    <input type="hidden" name="action" value="create">
+                                    <input type="submit" class="object-view-button" value="Create">
+                                </form>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <?php
+                        $page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
+                        switch($_GET["view"]){
+                            case "songs":
+                                addCreateObjectRow("Add a new song to the list", "A new song to be available for users to listen.", "");
+                                $searchQuery = "SELECT SONG_TITLE, SONG_ARTIST, SONG_GENRE, SONG_ID from song;";
+                                $result = $connection->query($searchQuery);
+                                $pageCount = ceil($result->num_rows/$contentPerPage);
+                                for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                    $row = $result->fetch_all()[$i];
+                                    $title = $row[0];
+                                    $artist = $row[1];
+                                    $genre = $row[2];
+                                    $id = intval($row[3]);
+                                    addListRow($title, $artist, $genre, $id);
+                                }
+                                break;
+                            case "feedbacks":
+                                addCreateObjectRow("Create a new feedback for testing purposes", "Feedback messages are great to make sure that the website work perfectly as intended. ", "");
+                                $searchQuery = "SELECT SENDER_NAME, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback;";
+                                $result = $connection->query($searchQuery);
+                                $pageCount = ceil($result->num_rows/$contentPerPage);
+                                for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                    $row = $result->fetch_all()[$i];
+                                    $senderName = $row[0];
+                                    $text = $row[1];
+                                    $time = $row[2];
+                                    $id = intval($row[3]);
+                                    if(strlen($text) > 75)
+                                        $text = substr($text, 0, 75)."...";
+                                    addListRow($senderName, $text, $time, $id);
+                                }
+                                break;
+                            case "secrets":
+                                addCreateObjectRow("Create a new secret key", "Secret keys are used to open the admin dashboard. ", "");
+                                $searchQuery = "SELECT SECRET_ID, ADMIN_SECRET FROM admin;";
+                                $result = $connection->query($searchQuery);
+                                $pageCount = ceil($result->num_rows/$contentPerPage);
+                                for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                    $row = $result->fetch_all()[$i];
+                                    $secretKey = $row[1];
+                                    $id = intval($row[0]);
+                                    if(strlen($secretKey) > 75)
+                                        $secretKey = substr($secretKey, 0, 75)."...";
+                                    addListRow($id, $secretKey, "", $id);
+                                }
+                                break;
                         }
-                        break;
-                    case "secrets":
-                        addCreateObjectRow("Create a new secret key", "Secret keys are used to open the admin dashboard. ", "");
-                        $searchQuery = "SELECT SECRET_ID, ADMIN_SECRET FROM admin;";
-                        $result = $connection->query($searchQuery);
-                        $pageCount = ceil($result->num_rows/$contentPerPage);
-                        for($i = $page - 1; $i < min($result->num_rows, $page*$contentPerPage); $i++){
-                            $row = $result->fetch_all()[$i];
-                            $desc = $row[1];
-                            if(strlen($desc) > 75)
-                                $desc = substr($desc, 0, 75)."...";
-                            addListRow($row[0], $desc, "", $row[0]);
-                        }
-                        break;
-                }
-                ?>
-            </div>
+                        ?>
+                    </div>
+                <?php } else { ?>
+                    <div id="editor-container">
+                        <table id="editor-table">
+                            <tbody>
+                                <tr>
+                                    <td class="editor-table-data-title">Title</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Artist</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Genre</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Release Year</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Lyrics</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Release Year</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Song Cover URL</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Youtube Embed URL</td>
+                                    <td>test value</td>
+                                </tr>
+                                <tr>
+                                    <td class="editor-table-data-title">Spotify Embed URL</td>
+                                    <td>test value</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                <?php } ?>
             <?php
             } else{
             ?>

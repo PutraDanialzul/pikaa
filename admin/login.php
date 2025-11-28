@@ -41,8 +41,8 @@
                     }
                     else{
                         foreach($result->fetch_all() as $row){
-                            var_dump($row[0]);
-                            var_dump($admin_secret);
+                            //var_dump($row[0]);
+                            //var_dump($admin_secret);
                             if($admin_secret == $row[0]){
                                 logIn($admin_secret);
                                 exit();
@@ -59,7 +59,7 @@
             </div>
             <div id="form-area" style="flex: 1;">
                 <form method="POST">
-                    <label for="secret-input">Please enter your secret key. </label>
+                    <label id="enter-secret-label" for="secret-input">Please enter your secret key. </label>
                     <input type="password" name="secret" id="secret-input" style="text-align: center;">
                     <input id="submit-key-button" type="submit">
                 </form>
