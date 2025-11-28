@@ -16,6 +16,7 @@ function logOut(){
         <title>Admin Dashboard - PIKAA</title>
         <link rel="stylesheet" href="/styles.css">
         <link rel="stylesheet" href="styles.css">
+        <script src="scripts.js"></script>
         <?php
         if(isset($_POST["logout"]))
             logOut();
@@ -45,7 +46,7 @@ function logOut(){
 
             <div id="topbar-actions">
                 <div id="menu-dropdown">
-                    <button id="menu-dropdown-button">Menu ▾</button>
+                    <button type="button" id="menu-dropdown-button">Menu ▾</button>
                     <div id="menu-dropdown-content">
                         <a href="?view=songs">Songs</a>
                         <a href="?view=feedbacks">Feedbacks</a>
@@ -166,52 +167,87 @@ function logOut(){
                         ?>
                     </div>
                 <?php } else { ?>
+                    <?php function createDisplayTable(array $data){ ?>
                     <div id="editor-container">
                         <table id="editor-table">
                             <tbody>
+                                <?php foreach($data as $type => $value){ ?>
                                 <tr>
-                                    <td class="editor-table-data-title">Title</td>
-                                    <td>test value</td>
+                                    <td class="editor-table-data-title"><?php echo $type; ?></td>
+                                    <td><?php echo $value; ?></td>
                                 </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Artist</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Genre</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Release Year</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Lyrics</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Release Year</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Song Cover URL</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Youtube Embed URL</td>
-                                    <td>test value</td>
-                                </tr>
-                                <tr>
-                                    <td class="editor-table-data-title">Spotify Embed URL</td>
-                                    <td>test value</td>
-                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
-                        
                     </div>
-                <?php } ?>
-            <?php
-            } else{
+                    <?php } ?>
+                    <?php
+                    $found = false;
+                    switch($_GET["view"]){
+                        case "songs":
+                            $searchQuery = "SELECT SONG_TITLE, SONG_GENRE, SONG_ARTIST, SONG_RELEASE_YEAR, SONG_LYRICS, SONG_COVER_URL, SONG_VIDEO_URL, SONG_MUSICS_URL FROM song WHERE SONG_ID=".$_GET["id"].";";
+                            $result = $connection->query($searchQuery);
+                            if($result->num_rows < 0) break;
+                            $found = true;
+                            $fetchedData = $result->fetch_all()[0];
+                            $data = [
+                                "Title"=>$fetchedData[0],
+                                "Genre"=>$fetchedData[1],
+                                "Artist"=>$fetchedData[2],
+                                "Release Year"=>$fetchedData[3],
+                                "Lyrics"=>nl2br($fetchedData[4]),
+                                "Cover URL"=>$fetchedData[5]."<br><br><img alt=\"song cover\" style=\"width: 300px;\" src=\"".$fetchedData[5]."\">",
+                                "Youtube Embed URL"=>$fetchedData[6]."<br><br><iframe src=\"".$fetchedData[6]."\" title=\"Embed Youtube Video\" style=\"width: 300px;\"></iframe>",
+                                "Spotify Embed URL"=>$fetchedData[7]."<br><br><iframe src=\"".$fetchedData[7]."\" title=\"Embed Spotify Music\" style=\"width: 300px; height: 80px;\"></iframe>"
+                            ];
+                            createDisplayTable($data);
+                            break;
+                        case "feedbacks":
+                            $searchQuery = "SELECT SENDER_NAME, SENDER_GENDER, SENDER_EMAIL, FEEDBACK_TYPE, FEEDBACK_TEXT, FEEDBACK_TIME FROM feedback WHERE FEEDBACK_ID=".$_GET["id"].";";
+                            $result = $connection->query($searchQuery);
+                            if($result->num_rows < 0) break;
+                            $found = true;
+                            $fetchedData = $result->fetch_all()[0];
+                            $data = [
+                                "Sender Name"=>$fetchedData[0],
+                                "Gender"=>$fetchedData[1],
+                                "Email"=>$fetchedData[2],
+                                "Feedback Type"=>$fetchedData[3],
+                                "Feedback Messages"=>nl2br($fetchedData[4]),
+                                "Feedback Time"=>$fetchedData[5]
+                            ];
+                            createDisplayTable($data);
+                            break;
+                        case "secrets":
+                            $searchQuery = "SELECT ADMIN_SECRET FROM admin WHERE SECRET_ID=".$_GET["id"].";";
+                            $result = $connection->query($searchQuery);
+                            if($result->num_rows < 0) break;
+                            $found = true;
+                            $fetchedData = $result->fetch_all()[0];
+                            $data = [
+                                "Secret Key"=>$fetchedData[0]
+                            ];
+                            createDisplayTable($data);
+                            break;
+                    }
+                    ?>
+                    <div id="bottom-edit-actionbar">
+                        <form method="GET" id="bottom-edit-left-form">
+                            <input type="hidden" name="view" value=<?php echo $_GET["view"] ?>>
+                            <input type="hidden" name="id" value=<?php echo $_GET["id"] ?>>
+                            <input type="hidden" name="action" value="edit">
+                            <input type="submit" value="Edit">
+                        </form>
+                        <form method="POST" id="bottom-edit-right-form" action="?view=<?php echo $_GET["view"]; ?>&id=<?php echo $_GET["id"]; ?>">
+                            <input type="hidden" name="view" value=<?php echo $_GET["view"] ?>>
+                            <input type="hidden" name="id" value=<?php echo $_GET["id"] ?>>
+                            <input type="hidden" name="action" value="delete">
+                            <input id="delete-confirmation" type="text" placeholder="confirm_delete" oninput="onDeleteConfirmationChange(this.value);">
+                            <input id="object-delete-button" type="submit" value="Delete" disabled>
+                        </form>
+                    </div>
+                <?php }
+            }else{
             ?>
             <p>This admin dashboard is used to check all of the feedback submissions from users. Song entries can also be edited using this page. Same goes to the secret key entries. </p>
             <?php } ?>
@@ -228,7 +264,7 @@ function logOut(){
 
                 <form method="GET">
                     <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
-                    <input id="page-input" type="number" name="page" min="1" placeholder="Page" required>
+                    <input id="page-input" type="number" name="page" min="1" max="<?php echo $pageCount ?>" placeholder="Page" required>
                     <button id="page-submin-button" type="submit">Go</button>
                 </form>
             </footer>

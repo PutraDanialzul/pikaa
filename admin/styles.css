@@ -337,3 +337,60 @@ input[type="submit"]:hover {
 #logged-in-logo:hover{
     scale: 1.1;
 }
+
+#bottom-edit-actionbar{
+    width: 100%;
+    display: block;
+    text-align: right;
+    margin: 1%;
+}
+
+#bottom-edit-actionbar form{
+    display: inline;
+    width: 100%;
+}
+
+#bottom-edit-actionbar form input[type="submit"]{
+    padding: 2px 12px;
+}
+
+#bottom-edit-actionbar form input[value="Delete"]{
+    background: #c62828;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#bottom-edit-actionbar form input[value="Delete"]:disabled{
+    background: #aaaaaa;
+    cursor: default;
+}
+
+#bottom-edit-actionbar form input[value="Edit"]{
+    background: #3228c6;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#bottom-edit-actionbar form input[value="Save"]{
+    background: #3cb92c;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#delete-confirmation {
+    padding: 3px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 6px;
+}
+
+#delete-confirmation::placeholder {
+    color: #bdbdbd;
+}
