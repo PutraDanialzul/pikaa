@@ -153,7 +153,7 @@ function logOut(){
                                     $editError = "Cannot edit current secret key!";
                                     break;
                                 }
-                                $query = "UPDATE `$tableName` SET `ADMIN_SECRET` = '".str_replace("'", "''", $newSecret)."'";
+                                $query = "UPDATE `$tableName` SET `ADMIN_SECRET` = '".str_replace("'", "''", $newSecret)."' WHERE `SECRET_ID` = '".$_POST["id"]."';";
                                 break;
                             case "create":
                                 $searchQuery = "SELECT ADMIN_SECRET FROM `$tableName` WHERE ADMIN_SECRET = '".str_replace("'", "''", $newSecret)."';";
