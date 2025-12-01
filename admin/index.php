@@ -386,7 +386,7 @@ function logOut(){
                                         $genre = $row[2];
                                         $lyrics = $row[4];
                                         foreach($searchVal as $search){
-                                            $search = str_replace("/", "\/", $search);
+                                            $search = preg_quote($search, '/');
                                             $title = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $title);
                                             $artist = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $artist);
                                             $genre = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $genre);
@@ -439,7 +439,7 @@ function logOut(){
                                         $text = $row[4];
                                         $time = $row[5];
                                         foreach($searchVal as $search){
-                                            $search = str_replace("/", "\/", $search);
+                                            $search = preg_quote($search, '/');
                                             $senderName = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $senderName);
                                             $gender = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $gender);
                                             $email = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $email);
@@ -496,7 +496,7 @@ function logOut(){
                                         $secretKey = $row[1];
                                         $idDisplay = $row[0];
                                         foreach($searchVal as $search){
-                                            $search = str_replace("/", "\/", $search);
+                                            $search = preg_quote($search, '/');
                                             $secretKey = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $secretKey);
                                             $idDisplay = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $idDisplay);
                                         }
