@@ -460,7 +460,7 @@ function logOut(){
                                         $genOffset = stripos($gender, "<span");
                                         $emailOffset = stripos($email, "<span");
                                         $typeOffset = stripos($type, "<span");
-                                        addListRow($senderName, $text.($genOffset == false ? "": "<br>Gender search: $gender").($emailOffset == false ? "": "<br>Email search: $email").($typeOffset == false ? "": "<br>Feedback type search: $type"), $time, $id);
+                                        addListRow($senderName, $text.(!str_contains($gender, "<span") ? "": "<br>Gender search: $gender").(!str_contains($email, "<span") ? "": "<br>Email search: $email").(!str_contains($type, "<span") ? "": "<br>Feedback type search: $type"), $time, $id);
                                     }
                                 }
                                 break;
