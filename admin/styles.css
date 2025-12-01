@@ -406,3 +406,39 @@ input[type="submit"]:hover {
     border: 0px;
     color: white;
 }
+
+#search-info-container{
+    display: flex;
+    width: fit-content;
+    text-align: center;
+    border: 1px solid #ffffff3b;
+    padding: 0px 10px;
+    border-radius: 6px;
+    background-color: #ffffff1f;
+}
+
+#search-info-container a{
+    display: block;
+    margin: auto auto;
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgba(245, 245, 245, 0.24);
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.063);
+    border-radius: 6px;
+}
+
+#search-info-container a:hover{
+    background-color: rgba(255, 255, 255, 0.186);
+}
+
+#search-info-container p span{
+    background-color: red;
+    padding: 0px 2px;
+}
+
+.search-result{
+    background-color: red;
+    color: black;
+}

@@ -63,6 +63,7 @@ function logOut(){
                 $searchQuery = "SELECT ADMIN_SECRET FROM admin WHERE ADMIN_SECRET = '".str_replace("'", "''", $admin_secret)."'";
                 $result = $connection->query($searchQuery);
                 if($result->num_rows < 1){
+                    $connection->close();
                     logOut();
                 }
                 else $current_secret = $admin_secret;
@@ -260,7 +261,7 @@ function logOut(){
             <div id="logo-area">
                 <a href="/"><img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo"></a>
             </div>
-            <p><?php echo "Current secret key: <span style=\"background-color: red;\">".$current_secret."</span>" ?></p>
+            <p><?php echo "Current secret key: <span style=\"background-color: green; padding: 0px 2px;\">".$current_secret."</span>" ?></p>
             <div id="topbar-actions">
                 <div id="menu-dropdown">
                     <button type="button" id="menu-dropdown-button">Menu ▾</button>
@@ -297,6 +298,12 @@ function logOut(){
                     ?>
                 </h1>
                 <?php if(isset($_GET["view"])){ ?>
+                    <?php if(isset($_GET["search"])) { ?>
+                    <div id="search-info-container">
+                        <p>Searching: <span><?php echo $_GET["search"]; ?></span></p>
+                        <a href="?view=<?php echo $_GET["view"] ?>">Reset</a>
+                    </div>
+                    <?php } ?>
                     <form method="GET" id="search-bar">
                         <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
                         <input type="text" name="search" placeholder="Search..." required>
@@ -344,49 +351,158 @@ function logOut(){
                         switch($_GET["view"]){
                             case "songs":
                                 addCreateObjectRow("Add a new song to the list", "A new song to be available for users to listen.", "");
-                                $searchQuery = "SELECT SONG_TITLE, SONG_ARTIST, SONG_GENRE, SONG_ID from song;";
-                                $result = $connection->query($searchQuery);
-                                $pageCount = ceil($result->num_rows/$contentPerPage);
-                                $fetched = $result->fetch_all();
-                                for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
-                                    $row = $fetched[$i];
-                                    $title = $row[0];
-                                    $artist = $row[1];
-                                    $genre = $row[2];
-                                    $id = intval($row[3]);
-                                    addListRow($title, $artist, $genre, $id);
+                                $searchQuery = "";
+                                if(!isset($_GET["search"])){
+                                    $searchQuery = "SELECT SONG_TITLE, SONG_ARTIST, SONG_GENRE, SONG_ID from song;";
+                                    $result = $connection->query($searchQuery);
+                                    $pageCount = ceil($result->num_rows/$contentPerPage);
+                                    $fetched = $result->fetch_all();
+                                    for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                        $row = $fetched[$i];
+                                        $title = $row[0];
+                                        $artist = $row[1];
+                                        $genre = $row[2];
+                                        $id = intval($row[3]);
+                                        addListRow($title, $artist, $genre, $id);
+                                    }
+                                }else{
+                                    $searchVal = explode(" ", $_GET["search"]);
+                                    $searchQuery = "SELECT SONG_TITLE, SONG_ARTIST, SONG_GENRE, SONG_ID, SONG_LYRICS FROM song WHERE";
+                                    $notFirst = false;
+                                    foreach($searchVal as $search){
+                                        $searchWildcard = "%".str_replace("'", "''", $search)."%";
+                                        if($notFirst) $searchQuery .= " OR";
+                                        $searchQuery .= " SONG_TITLE LIKE '$searchWildcard' OR SONG_ARTIST LIKE '$searchWildcard' OR SONG_GENRE LIKE '$searchWildcard' OR SONG_LYRICS LIKE '$searchWildcard'";
+                                        $notFirst = true;
+                                    }
+                                    $searchQuery .= ";";
+                                    $result = $connection->query($searchQuery);
+                                    $pageCount = ceil($result->num_rows/$contentPerPage);
+                                    $fetched = $result->fetch_all();
+                                    for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                        $row = $fetched[$i];
+                                        $title = $row[0];
+                                        $artist = $row[1];
+                                        $genre = $row[2];
+                                        $lyrics = $row[4];
+                                        foreach($searchVal as $search){
+                                            $search = str_replace("/", "\/", $search);
+                                            $title = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $title);
+                                            $artist = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $artist);
+                                            $genre = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $genre);
+                                            $lyrics = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $lyrics);
+                                        }
+                                        $id = intval($row[3]);
+                                        $lyricsOffset = stripos($lyrics, "<span");
+                                        $endOffset = stripos(substr($lyrics, $lyricsOffset), "</span>")+7;
+                                        addListRow($title, $artist.(str_contains($lyrics, "<span") ? ("<br>"."Lyrics search: ".($lyricsOffset > 0 ? "..." : "").substr($lyrics, $lyricsOffset, $endOffset)."...") : ""), $genre, $id);
+                                    }
                                 }
                                 break;
                             case "feedbacks":
                                 addCreateObjectRow("Create a new feedback for testing purposes", "Feedback messages are great to make sure that the website work perfectly as intended. ", "");
-                                $searchQuery = "SELECT SENDER_NAME, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback;";
-                                $result = $connection->query($searchQuery);
-                                $pageCount = ceil($result->num_rows/$contentPerPage);
-                                $fetched = $result->fetch_all();
-                                for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
-                                    $row = $fetched[$i];
-                                    $senderName = $row[0];
-                                    $text = $row[1];
-                                    $time = $row[2];
-                                    $id = intval($row[3]);
-                                    if(strlen($text) > 75)
-                                        $text = substr($text, 0, 75)."...";
-                                    addListRow($senderName, $text, $time, $id);
+                                if(!isset($_GET["search"])){
+                                    $searchQuery = "SELECT SENDER_NAME, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback;";
+                                    $result = $connection->query($searchQuery);
+                                    $pageCount = ceil($result->num_rows/$contentPerPage);
+                                    $fetched = $result->fetch_all();
+                                    for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                        $row = $fetched[$i];
+                                        $senderName = $row[0];
+                                        $text = $row[1];
+                                        $time = $row[2];
+                                        $id = intval($row[3]);
+                                        if(strlen($text) > 75)
+                                            $text = substr($text, 0, 75)."...";
+                                        addListRow($senderName, $text, $time, $id);
+                                    }
+                                }else{
+                                    $searchVal = explode(" ", $_GET["search"]);
+                                    $searchQuery = "SELECT SENDER_NAME, SENDER_GENDER, SENDER_EMAIL, FEEDBACK_TYPE, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback WHERE";
+                                    $notFirst = false;
+                                    foreach($searchVal as $search){
+                                        $searchWildcard = "%".str_replace("'", "''", $search)."%";
+                                        if($notFirst) $searchQuery .= " OR";
+                                        $searchQuery .= " SENDER_NAME LIKE '$searchWildcard' OR SENDER_GENDER LIKE '$searchWildcard' OR SENDER_EMAIL LIKE '$searchWildcard' OR FEEDBACK_TYPE LIKE '$searchWildcard' OR FEEDBACK_TEXT LIKE '$searchWildcard' OR FEEDBACK_TIME LIKE '$searchWildcard'";
+                                        $notFirst = true;
+                                    }
+                                    $searchQuery .= ";";
+                                    $result = $connection->query($searchQuery);
+                                    $pageCount = ceil($result->num_rows/$contentPerPage);
+                                    $fetched = $result->fetch_all();
+                                    for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                        $row = $fetched[$i];
+                                        $senderName = $row[0];
+                                        $gender = $row[1];
+                                        $email = $row[2];
+                                        $type = $row[3];
+                                        $text = $row[4];
+                                        $time = $row[5];
+                                        foreach($searchVal as $search){
+                                            $search = str_replace("/", "\/", $search);
+                                            $senderName = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $senderName);
+                                            $gender = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $gender);
+                                            $email = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $email);
+                                            $type = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $type);
+                                            $text = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $text);
+                                            $time = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $time);
+                                        }
+                                        $id = intval($row[6]);
+                                        $textOffset = stripos($text, "<span");
+                                        if(!str_contains($text, "<span")){
+                                            if(strlen($text) > 75)
+                                                $text = substr($text, 0, 75)."...";
+                                        }
+                                        else{
+                                            $endOffset = stripos(substr($text, $textOffset), "</span>") + 7;
+                                            $text = ($textOffset > 0 ? "..." : "").substr($text, $textOffset, $endOffset)."...";
+                                        }
+                                        $genOffset = stripos($gender, "<span");
+                                        $emailOffset = stripos($email, "<span");
+                                        $typeOffset = stripos($type, "<span");
+                                        addListRow($senderName, $text.($genOffset == false ? "": "<br>Gender search: $gender").($emailOffset == false ? "": "<br>Email search: $email").($typeOffset == false ? "": "<br>Feedback type search: $type"), $time, $id);
+                                    }
                                 }
                                 break;
                             case "secrets":
                                 addCreateObjectRow("Create a new secret key", "Secret keys are used to open the admin dashboard. ", "");
-                                $searchQuery = "SELECT SECRET_ID, ADMIN_SECRET FROM admin;";
-                                $result = $connection->query($searchQuery);
-                                $pageCount = ceil($result->num_rows/$contentPerPage);
-                                $fetched = $result->fetch_all();
-                                for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
-                                    $row = $fetched[$i];
-                                    $secretKey = $row[1];
-                                    $id = intval($row[0]);
-                                    if(strlen($secretKey) > 75)
-                                        $secretKey = substr($secretKey, 0, 75)."...";
-                                    addListRow($id, $secretKey, "", $id);
+                                if(!isset($_GET["search"])){
+                                    $searchQuery = "SELECT SECRET_ID, ADMIN_SECRET FROM admin;";
+                                    $result = $connection->query($searchQuery);
+                                    $pageCount = ceil($result->num_rows/$contentPerPage);
+                                    $fetched = $result->fetch_all();
+                                    for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                        $row = $fetched[$i];
+                                        $secretKey = $row[1];
+                                        $id = intval($row[0]);
+                                        addListRow($id, $secretKey, "", $id);
+                                    }
+                                } else{
+                                    $searchVal = explode(" ", $_GET["search"]);
+                                    $searchQuery = "SELECT SECRET_ID, ADMIN_SECRET FROM admin WHERE";
+                                    $notFirst = false;
+                                    foreach($searchVal as $search){
+                                        $searchWildcard = "%".str_replace("'", "''", $search)."%";
+                                        if($notFirst) $searchQuery .= " OR";
+                                        $searchQuery .= " SECRET_ID LIKE '$searchWildcard' OR ADMIN_SECRET LIKE '$searchWildcard'";
+                                        $notFirst = true;
+                                    }
+                                    $searchQuery .= ";";
+                                    $result = $connection->query($searchQuery);
+                                    $pageCount = ceil($result->num_rows/$contentPerPage);
+                                    $fetched = $result->fetch_all();
+                                    for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
+                                        $row = $fetched[$i];
+                                        $secretKey = $row[1];
+                                        $idDisplay = $row[0];
+                                        foreach($searchVal as $search){
+                                            $search = str_replace("/", "\/", $search);
+                                            $secretKey = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $secretKey);
+                                            $idDisplay = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $idDisplay);
+                                        }
+                                        $id = intval($row[0]);
+                                        addListRow($idDisplay, $secretKey, "", $id);
+                                    }
                                 }
                                 break;
                         }
@@ -515,6 +631,9 @@ function logOut(){
         </section>
         <?php if(isset($_GET["view"])){ ?>
             <footer id="footer-pagination">
+                <?php if(!isset($_GET["id"])){ ?>
+                <p>Current Page: <?php echo isset($_GET["page"]) ? $_GET["page"] : 1; ?></p>
+                <?php } ?>
                 <?php 
                 for($i = 1; $i <= min($pageCount, 10); $i++){ 
                 ?>
@@ -522,16 +641,18 @@ function logOut(){
                 <?php
                 } 
                 ?>
-
                 <form method="GET">
                     <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
                     <?php if(isset($_GET["search"])){ ?>
                     <input type="hidden" name="search" value="<?php echo $_GET["search"] ?>">
                     <?php } ?>
-                    <input id="page-input" type="number" name="page" min="1" max="<?php echo $pageCount ?>" placeholder="Page" required>
+                    <input id="page-input" type="number" name="page" min="1" max="<?php echo max(1, $pageCount) ?>" placeholder="Page" required>
                     <button id="page-submit-button" type="submit">Go</button>
                 </form>
             </footer>
         <?php } ?>
     </body>
 </html>
+<?php
+$connection->close();
+?>
