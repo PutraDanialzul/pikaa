@@ -1,32 +1,20 @@
 #logo{
     display: block;
-    width: 400px;
+    width: 100%;
     animation: fadeIn 1.2s ease;
     transition: all 0.5s ease;
 }    
 #logo:hover{
     scale: 1.1;
 }
-#logo-area img {
-    height: 50px;
-}
-#logout-button {
-    background: #c62828;
-    border: none;
-    padding: 10px 16px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-}
-#logout-button:hover {
-    background: #b71c1c;
-}
-#logged-in-logo{
-    transition: all 0.5s ease;
+#logo-area {
+    width: 12%;
+    margin-top: 3%;
+    margin-left: 3%;
 }
 
-#logged-in-logo:hover{
-    scale: 1.1;
+#logo-area a{
+    display: block;
 }
 
 img{
