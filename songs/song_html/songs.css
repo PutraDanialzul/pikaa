@@ -61,5 +61,36 @@
     color: white;
     cursor: pointer;
 }
+:root {
+    --bg-dark: #0e111a;
+    --card-bg: #1a1f2c;
+    --text-light: #ffffff;
+    --text-muted: #a0a0a0;
+}
 
+/* Pagination Styling */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    
+    margin-top: auto; 
+}
+
+.current-page-info {
+    margin-right: 15px;
+    color: var(--text-muted);
+   
+}
+
+.pagination-controls button, 
+.pagination-controls input {
+    padding: 8px 12px;
+    border: 1px solid #333;
+    background-color: var(--card-bg);
+    color: var(--text-light);
+    border-radius: 4px;
+    margin-left: 5px;
+}
 
