@@ -9,24 +9,15 @@
         <meta name="title" content="Send Feedback - PIKAA">
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="/styles.css">
+        <!-- External JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     </head>
     <body>
-        <style>
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
-<div id="success-panel">
-    <p hidden style="background-color: green;" > Your Feedback has Successfully Submitted </p>
-    <div>
-        <img src="/media/pikaa.jpg" alt="PIKAA LOGO" width="200">
-        <br>
-        <h1 style="text-align: center;">SEND A FEEDBACK TO US </h1>
-        <h3 style="text-align: center;"><i> Let us know if you have any songs recommendation or suggestion </i></h3>
-        <br><br>
-        <form action="#" method="POST" class="feedback-form">
+        <img src="/media/pikaa.png" alt="PIKAA Logo" width="200">
+        <h1>Send a feedback to PIKAA!</h1>
+        <p>Tell us if you have an unlisted song in mind, or just want to update some inaccurate information from our site!</p>
+        <p>(Or even if you just want someone to talk to.) </p>
+        <form id="formcarryForm" action="https://formcarry.com/s/uv9oeOhe7hR" method="POST" enctype="multipart/form-data">
             <label for="name">Your Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
             <label>Your Gender: </label><br>
@@ -47,7 +38,11 @@ img {
             <label for="feedback">Your Feedback:</label><br>
             <textarea id="feedback" name="feedback" rows="4" cols="30" required></textarea><br><br>
             <button type="submit" id="submitButton">Submit</button>
-        </form>       
-
+        </form>
+        <br>
+        <p>Or just <a href="/">go back</a> if you want. </p>
+        
+    <!-- REQUIRED FOR JQUERY -->
+    <script src="feedback.js"></script>
     </body>
 </html>
