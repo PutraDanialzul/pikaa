@@ -25,6 +25,10 @@ body {
     color: rgb(226, 225, 214);
 }
 
+body{
+    color: white;
+}
+
 .h2 {
     font-weight: 400;
     color: #cccccc;
