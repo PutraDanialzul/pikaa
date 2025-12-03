@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Song Info</title>
+        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="songs.css">
+    </head>
+    <body>
+        <a href="/" style="width: fit-content; height: fit-content;"><img src="/media/pikaa.png" alt="PIKAA Logo" id="logo"></a>
+        <div style="text-align: center;">
+            <div class="bar-container">
+                <label for="genre-bar" class="bar-label">Genre:</label>
+                <input id="genre-bar" name="genre" type="text" placeholder="Search..">
+            </div>
+            <div class="bar-container">
+                <label for="tag-bar" class="bar-label">Tags:</label>
+                <input id="tag-bar" name="tag" type="text" placeholder="Search..">
+                <button class="button-bar" type="button">Add</button>
+            </div>
+            <div style="text-align: center;">
+                <input id="search-bar" name="search" type="text" placeholder="Search Song...">
+                <button class="button-bar" type="button">Search</button>
+        </div>
+
+        <h3 style="color: rgb(105, 185, 213);">OUR ULTIMATE SONG CHOICES</h3>
+        
+        <div class="song-grid">
+            <div class="song-card" id="img"><a href="/songs/info?q=the_world_is_ugly-my_chemical_romance" style="width: fit-content; height: fit-content;">
+                <img src="mcralbum.jpg" alt="Album Art">
+                <h4>The World is Ugly</h4>
+                <p>My Chemical Romance</p>
+                <p>Rock</p>
+            </div>
+
+            <div class="song-card" id="img" ><a href="/songs/info?q=bohemian_rhapsody-queen" style="width: fit-content; height: fit-content;">
+                <img src="bohemian.jpg" alt="Album Art">
+                <h4>Bohemian Rhapsody</h4>
+                <p>Queen</p>
+                <p>Rock</p>
+            </div>
+
+            <div class="song-card" id="img"><a href="/songs/info?q=never_gonna_give_you_up-rick_astley" style="width: fit-content; height: fit-content;">
+                <img src="rickastley.jpg" alt="rickastley">
+                <h4 style="font-size: 13px;">Never Gonna Give You Up</h4>
+                <p>Rick Astley</p>
+                <p>Pop</p>       
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+
+#logo{
+    display: block;
+    margin: auto;
+    width: 20%;
+    animation: fadeIn 1.2s ease;
+    transition: all 0.5s ease;
+}
+
+#logo:hover{
+    scale: 1.1;
+}
+
+#img{
+    display: block;
+    width: 15%;
+    animation: fadeIn 1.2s ease;
+    transition: all 0.5s ease;
+}
+
+#img:hover{
+    scale: 1.1;
+}
+
+.bar-container {
+    display: inline-block;
+    vertical-align: middle; 
+    margin: 2% 10%; 
+    
+}
+
+#genre-bar{
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 6px;
+}
+#tag-bar{
+    padding: 10px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(0,255,0,0.2);
+    color: white;
+    border-radius: 6px;
+}
+
+#search-bar {
+    padding: 10px;
+    width: 30%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    border-radius: 6px;
+}
+
+.button-bar{
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+
