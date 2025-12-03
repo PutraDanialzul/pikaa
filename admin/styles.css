@@ -442,3 +442,7 @@ input[type="submit"]:hover {
     background-color: red;
     color: black;
 }
+
+body *{
+    animation: fadeIn 0.8s ease;
+}
