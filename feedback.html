@@ -8,7 +8,8 @@
         <meta name="keywords" content="songs, music, media, listing">
         <meta name="title" content="Send Feedback - PIKAA">
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/feedback.css">
     </head>
     <body>
         <style>
@@ -23,22 +24,22 @@ img {
     <div>
         <img src="/media/pikaa.jpg" alt="PIKAA LOGO" width="200">
         <br>
-        <h1 style="text-align: center;">SEND A FEEDBACK TO US </h1>
-        <h3 style="text-align: center;"><i> Let us know if you have any songs recommendation or suggestion </i></h3>
+        <h1 style="text-align: center; color: yellow;">SEND A FEEDBACK TO US </h1>
+        <h3 style="text-align: center; color: purple;"><i> Let us know if you have any songs recommendation or suggestion </i></h3>
         <br><br>
         <form action="#" method="POST" class="feedback-form">
-            <label for="name">Your Name:</label><br>
+            <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required><br><br>
-            <label>Your Gender: </label><br>
+            <label>Your Gender: </label>
             <label>
               <input type="radio" name="gender" value="male">Male
             </label>
             <label>
               <input type="radio" name="gender" value="female">Female
             </label><br><br>
-            <label for="email">Your Email:</label><br>
+            <label for="email">Your Email:</label>
             <input type="email" id="email" name="email" required><br><br>
-            <label>Please choose the type of the feedback: </label><br>
+            <label>Please choose the type of the feedback: </label>
             <select name="type_of_feedback">
               <option value="suggestion">Suggestion</option>
               <option value="complaint">Complaint</option>
@@ -46,7 +47,9 @@ img {
             </select><br><br>
             <label for="feedback">Your Feedback:</label><br>
             <textarea id="feedback" name="feedback" rows="4" cols="30" required></textarea><br><br>
-            <button type="submit" id="submitButton">Submit</button>
+            <input id="submitButton" type="submit">
+            <br>
+            <a href="/index.html"><input id="backButton" type="button" value="Go Back"></a>
         </form>       
 
     </body>

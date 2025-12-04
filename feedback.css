@@ -1,0 +1,41 @@
+#submitButton {
+	width: 100%;
+    padding: 12px 0px;
+    background: #5f3bff;
+    border: none;
+    border-radius: 6px;
+    display: block;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+body {
+    border: 2px double rgb(5, 100, 100);
+    min-height: 50vh;
+    background: linear-gradient(135deg, #010103, #010343);
+    font-family: sans-serif;
+    padding-bottom: 95px; 
+}
+
+.feedback-form {
+	color: white;
+	font-style: italic;
+	text-align: center;
+}
+
+#backButton {
+	width: 100%;
+    padding: 12px 0px;
+    background: red;
+    border: none;
+    border-radius: 6px;
+    display: block;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
