@@ -39,3 +39,34 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
+
+
+#logo{
+    display: block;
+    width: 100%;
+    animation: fadeIn 1.2s ease;
+    transition: all 0.5s ease;
+}    
+#logo:hover{
+    scale: 1.1;
+}
+#logo-area {
+    width: 12%;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+#logo-area a{
+    display: block;
+}
+
+.success-banner {
+    background-color: #28a745; /* hijau */
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}

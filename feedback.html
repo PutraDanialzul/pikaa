@@ -18,24 +18,32 @@ img {
   margin-right: auto;
 }
 </style>
-
-        <img src="/media/pikaa.jpg" alt="PIKAA LOGO" width="200">
+        <img src="/media/pikaa.jpg" alt="PIKAA LOGO" width="200"></a>
         <br>
-        <h1 style="text-align: center; color: yellow;">SEND A FEEDBACK TO US </h1>
+        <h1 style="text-align: center; color: yellow;">SEND A FEEDBACK TO US :) </h1>
         <h3 style="text-align: center; color: purple;"><i> Let us know if you have any songs recommendation or suggestion </i></h3>
         <br><br>
-        <form action="#" method="POST" class="feedback-form">
+
+
+
+
+        <form action="/index.html" method="POST" class="feedback-form">
             <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required><br><br>
+            <input type="text" id="name" name="name" placeholder="e.g., Isyraf" required><br><br>
             <label>Your Gender: </label>
             <label>
-              <input type="radio" name="gender" value="male">Male
+              <input type="radio" name="gender" value="male" required>Male
             </label>
             <label>
-              <input type="radio" name="gender" value="female">Female
+              <input type="radio" name="gender" value="female" required>Female
             </label><br><br>
             <label for="email">Your Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
+            <input type="email" id="email" name="email" placeholder="e.g., isyraf@example.com" required><br><br>
+
+            <!-- Feedback Details -->
+        <fieldset class="card">
+            <legend>Feedback Details</legend>
+
             <label>Please choose the type of the feedback: </label>
             <select name="type_of_feedback">
               <option value="suggestion">Suggestion</option>
@@ -43,11 +51,14 @@ img {
               <option value="enquiry">Enquiry</option>
             </select><br><br>
             <label for="feedback">Your Feedback:</label><br>
-            <textarea id="feedback" name="feedback" rows="4" cols="30" required></textarea><br><br>
-            <input id="submitButton" type="submit">
+            <textarea id="feedback" name="feedback" rows="4" cols="30" placeholder="type your text here..." required></textarea><br><br>
+        </fieldset>
+        <br>
+            <a href="/index.html#successSubmit"><input id="submitButton" type="submit"></a>
             <br>
             <a href="/index.html"><input id="backButton" type="button" value="Go Back"></a>
-        </form>       
+        </form>     
+
 
     </body>
 </html>
