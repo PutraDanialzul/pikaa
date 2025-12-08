@@ -1,0 +1,63 @@
+/* BODY BACKGROUND (your code preserved) */
+body {
+  border: 2px double rgb(5, 100, 100);
+  min-height: 50vh;
+  background: linear-gradient(135deg, #010103, #010343);
+  font-family: sans-serif;
+  padding-bottom: 95px;
+  color: white; /* makes text readable on dark bg */
+}
+
+/* LOGO */
+.logo-container {
+  text-align: center;
+  padding: 25px 0;
+}
+
+/* SONG INFO SECTION (cover + details side-by-side) */
+.song-info {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  align-items: center;
+}
+
+.song-details p {
+  margin: 8px 0;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* MAIN CONTENT: Lyrics + Iframes side by side */
+.content-section {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px;
+}
+
+.lyrics {
+  max-width: 450px;
+  line-height: 1.6;
+}
+
+.lyrics h1 {
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+/* IFRAMES: stacked vertically */
+.media-embed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.media-embed iframe {
+  width: 350px;
+  height: 200px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}

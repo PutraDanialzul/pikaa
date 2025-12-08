@@ -1,21 +1,52 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Song Info</title>
-        <link rel="stylesheet" href="/styles.css">
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-        <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Expires" content="0">
-    </head>
-    <body>
-        <h1 id="song-title">song-title</h1>
-        <h2 id="song-artist">song-artist</h2>
-        <img id="song-cover" alt="song-cover" width=250 height =250 src="">
-        <h2 id="song-language">song-language</h2>
-        <h2 id="song-genre">song-genre</h2>
-        <p id="song-lyrics">song-lyrics</p>
-        <iframe id="song-video" width=500 height =500></iframe>
-        <a href="/songs/">Go Back</a>
-        <script src="info.js"></script>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PIKAA</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Logo -->
+  <div class="logo-container">
+    <img src="/media/pikaa.png" width="350" alt="PIKAA">
+  </div>
+
+  <!-- Song Info Section -->
+  <div class="song-info">
+    <img 
+      src="https://i0.wp.com/ladybosz.com/wp-content/uploads/2025/01/The-Storm-alyph-1.jpg?fit=1080%2C1080&ssl=1" 
+      width="350" 
+      alt="Song Cover"
+      class="song-cover"
+    >
+
+    <div class="song-details">
+      <p><strong>NAME</strong>: INGAT</p>
+      <p><strong>ARTIST</strong>: ALYPH</p>
+      <p><strong>RELEASED YEAR</strong>: 2025</p>
+    </div>
+  </div>
+
+  <!-- Lyrics + Media Section -->
+  <div class="content-section">
+
+    <div class="lyrics">
+      <h1>LYRICS</h1>
+      Kau kata kau nampak aku tengok dari jauh kau rasa terganggu<br>
+      Aku kata aku tak berani mengejar apa yang aku mahu<br>
+      Kau kata kau tak percaya aku boleh buat kau tunggu macam tu<br>
+      Aku ingat masa aku jatuh cinta denganmu<br>
+    </div>
+
+    <div class="media-embed">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator&theme=0"></iframe>
+    </div>
+
+  </div>
+
+</body>
 </html>
