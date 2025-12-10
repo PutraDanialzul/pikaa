@@ -150,3 +150,30 @@ body {
     resize: none;
 }
 
+#success-banner {
+    width: 100%;
+    padding: 18px 0;
+    background: linear-gradient(135deg, #00b400, #2d792d);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 0px black, 1px -1px 0px black, -1px -1px 0px black, -1px 1px 0px black, 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black, 0px -1px 0px black;
+    animation: slideDown 1s ease;
+}
+
+#fail-banner {
+    width: 100%;
+    padding: 18px 0;
+    background: linear-gradient(135deg, #b40000, #792d2d);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 0px black, 1px -1px 0px black, -1px -1px 0px black, -1px 1px 0px black, 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black, 0px -1px 0px black;
+    animation: slideDown 1s ease;
+}
+
+/* Animation for smooth slide-in */
+@keyframes slideDown {
+    from { transform: translateY(-20%); opacity: 0.0; }
+    to { transform: translateY(0); opacity:1.0; }
+}
