@@ -15,7 +15,7 @@
 			<div id="contact-menu" onclick=" window.location.href = '/feedback';">
 				Contact Us
 			</div>
-			<div id="credits-menu" onclick=" window.location.href = '/feedback';">
+			<div id="credits-menu" onclick=" window.location.href = '/credits/';">
 				Credits
 			</div>
 		</header>

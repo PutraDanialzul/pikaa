@@ -63,7 +63,7 @@
             }
         }
     } ?>  
-    <img src="/media/pikaa.jpg" alt="PIKAA LOGO" class="center-img" width="200">
+    <a href="/"><img src="/media/pikaa.jpg" alt="PIKAA LOGO" class="center-img" width="200"></a>
 
     <h1 class="title">SEND A FEEDBACK TO US :)</h1>
     <h3 class="subtitle"><i>Let us know if you have any songs recommendation or suggestion</i></h3>
