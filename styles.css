@@ -1,20 +1,19 @@
-
-
 body {
     border: 2px double rgb(5, 100, 100);
     min-height: 50vh;
     background: linear-gradient(135deg, #010103, #010343);
     font-family: sans-serif;
-    padding-bottom: 95px; 
+    padding-bottom: 95px;
+    color: white; 
 }
 
 .container {
     
     text-align: center;
-    padding-top: 50px;
+    padding-top: 0px;
     max-width: 100%;
-    margin: 0 auto;
-    padding-bottom: 10px;
+    margin-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Header Styles */
@@ -24,9 +23,6 @@ body {
     color: rgb(226, 225, 214);
 }
 
-body{
-    color: white;
-}
 
 .h2 {
     font-weight: 400;
@@ -47,36 +43,37 @@ body{
     transform: scale(1.10);
 }
 
-/* Navigation Links */
-.nav-links {
-    margin-bottom: 50px;
-    padding: 10px;
-    border-top: 3px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
-    gap: 100px;
+/* Navigation Container */
+.navigation {
+    justify-content: stretch;
+    gap: 0px;
+    margin-bottom: 60px;
+    margin-top: 0;
+    border-top: 1px solid rgb(10, 253, 253);
+    border-bottom: 1px solid rgb(10, 253, 253);
+    display: flex;
 }
 
-.nav-links a {
-    display: inline-block;
-    margin: 10px 15px;
+.navigation a {
     text-decoration: none;
     font-weight: bold;
-    color: rgb(86, 64, 213);
+    background-color: rgb(71, 11, 11);
     transition: color 0.3s, transform 0.3s;
+    font-size: 24px;
+    padding: 20px 20px; 
+    color: white; 
+    flex-grow: 1;
+    text-align: center;
 }
 
-
-.nav-links a:visited {
-    color: rgb(211, 103, 254);
-}
-.nav-links a:hover  {
-    color: rgb(15, 140, 185);
-    transform: scale(1.05);
-}
-.nav-links a:active {
-    color: rgb(21, 255, 200);
+.navigation .feedback{
+    background-color: rgb(158, 80, 16);
 }
 
+/* Hover effects */
+.navigation a:visited { color: rgb(218, 199, 35); }
+.navigation a:hover   { color: rgb(232, 224, 224); transform: scale(1.05); }
+.navigation a:active  { color: rgb(21, 255, 200); }
 
 .btn-main {
     
