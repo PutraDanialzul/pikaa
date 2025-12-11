@@ -46,7 +46,6 @@ function logOut(){
 <html>
     <head>
         <title>Admin Dashboard - PIKAA</title>
-        <link rel="stylesheet" href="/styles.css">
         <link rel="stylesheet" href="styles.css">
         <script src="scripts.js"></script>
         <?php
@@ -314,18 +313,23 @@ function logOut(){
             <?php if(isset($_GET["view"])){ ?>
                 <?php if(!isset($_GET["id"]) && !isset($_GET["action"])){ ?>
                     <div id="section-list-container">
-                        <?php function addListRow(string $title, string $description, string $rightInformation, int $id, string $searchKeyword = ""){ ?>
+                        <?php function addListRow(string $title, array $descriptions, string $rightInformation, int $id, array $searchKeywords = []){ ?>
                         <div class="list-item">
                             <div class="list-item-left">
-                                <?php if($searchKeyword == ""){ ?>
+                                <?php
+                                foreach($searchKeywords as $search){
+                                    $search = preg_quote($search, '/');
+                                    $title = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $title);
+                                    foreach($descriptions as $key => $desc)
+                                        $descriptions[$key] = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $desc);
+                                    $rightInformation = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $rightInformation);
+                                } 
+                                ?>
                                 <h3><?php echo $title; ?></h3>
-                                <p><?php echo $description; ?></p>
-                                <?php } ?>
+                                <p><?php foreach($descriptions as $key => $description){ echo $description; if(isset($descriptions[$key+1])) if($descriptions[$key+1] != "") echo "<br>"; }; ?></p>
                             </div>
                             <div class="list-item-right">
-                                <?php if($searchKeyword == ""){ ?>
                                 <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
-                                <?php } ?>
                                 <form method="GET">
                                     <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -367,7 +371,7 @@ function logOut(){
                                         $artist = $row[1];
                                         $genre = $row[2];
                                         $id = intval($row[3]);
-                                        addListRow($title, $artist, $genre, $id);
+                                        addListRow($title, [ $artist, "ID: ".$id ], $genre, $id);
                                     }
                                 }else{
                                     $searchVal = explode(" ", $_GET["search"]);
@@ -376,35 +380,36 @@ function logOut(){
                                     foreach($searchVal as $search){
                                         $searchWildcard = "%".str_replace("'", "''", $search)."%";
                                         if($notFirst) $searchQuery .= " OR";
-                                        $searchQuery .= " SONG_TITLE LIKE '$searchWildcard' OR SONG_ARTIST LIKE '$searchWildcard' OR SONG_GENRE LIKE '$searchWildcard' OR SONG_LYRICS LIKE '$searchWildcard'";
+                                        $searchQuery .= " SONG_TITLE LIKE '$searchWildcard' OR SONG_ARTIST LIKE '$searchWildcard' OR SONG_GENRE LIKE '$searchWildcard' OR SONG_LYRICS LIKE '$searchWildcard' OR SONG_ID LIKE '$searchWildcard'";
                                         $notFirst = true;
                                     }
                                     $searchQuery .= ";";
                                     $result = $connection->query($searchQuery);
                                     $pageCount = ceil($result->num_rows/$contentPerPage);
                                     $fetched = $result->fetch_all();
+                                    $shownLyricsLength = 50;
                                     for($i = ($page - 1) * $contentPerPage; $i < min($result->num_rows, $page*$contentPerPage); $i++){
                                         $row = $fetched[$i];
                                         $title = $row[0];
                                         $artist = $row[1];
                                         $genre = $row[2];
                                         $lyrics = $row[4];
-                                        foreach($searchVal as $search){
-                                            $search = preg_quote($search, '/');
-                                            $title = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $title);
-                                            $artist = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $artist);
-                                            $genre = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $genre);
-                                            $lyrics = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $lyrics);
-                                        }
                                         $id = intval($row[3]);
-                                        $lyricsOffset = stripos($lyrics, "<span");
-                                        $endOffset = stripos(substr($lyrics, $lyricsOffset), "</span>")+7;
-                                        addListRow($title, $artist.(str_contains($lyrics, "<span") ? ("<br>"."Lyrics search: ".($lyricsOffset > 0 ? "..." : "").substr($lyrics, $lyricsOffset, $endOffset)."...") : ""), $genre, $id);
+                                        $lyricsSearch = "";
+                                        foreach($searchVal as $search){
+                                            if(str_contains($lyrics, $search)){
+                                                $lyricsSearch = $search;
+                                                break;
+                                            }
+                                        }
+                                        $lyricsOffset = max(stripos($lyrics, $lyricsSearch)-25, 0);
+                                        addListRow($title, [$artist, "Lyrics search: ".($lyricsOffset == 0 ? "" : "...").substr($lyrics, $lyricsOffset, $shownLyricsLength).($lyricsOffset+$shownLyricsLength < strlen($lyrics) ? "..." : ""), "ID: ".$id], $genre, $id, $searchVal);
                                     }
                                 }
                                 break;
                             case "feedbacks":
                                 addCreateObjectRow("Create a new feedback for testing purposes", "Feedback messages are great to make sure that the website work perfectly as intended. ", "");
+                                $feedbackDisplayLength = 75;
                                 if(!isset($_GET["search"])){
                                     $searchQuery = "SELECT SENDER_NAME, FEEDBACK_TEXT, FEEDBACK_TIME, FEEDBACK_ID FROM feedback;";
                                     $result = $connection->query($searchQuery);
@@ -417,8 +422,8 @@ function logOut(){
                                         $time = $row[2];
                                         $id = intval($row[3]);
                                         if(strlen($text) > 75)
-                                            $text = substr($text, 0, 75)."...";
-                                        addListRow($senderName, $text, $time, $id);
+                                            $text = substr($text, 0, $feedbackDisplayLength)."...";
+                                        addListRow($senderName, [ $text ], $time, $id);
                                     }
                                 }else{
                                     $searchVal = explode(" ", $_GET["search"]);
@@ -442,29 +447,22 @@ function logOut(){
                                         $type = $row[3];
                                         $text = $row[4];
                                         $time = $row[5];
-                                        foreach($searchVal as $search){
-                                            $search = preg_quote($search, '/');
-                                            $senderName = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $senderName);
-                                            $gender = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $gender);
-                                            $email = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $email);
-                                            $type = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $type);
-                                            $text = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $text);
-                                            $time = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $time);
-                                        }
                                         $id = intval($row[6]);
-                                        $textOffset = stripos($text, "<span");
-                                        if(!str_contains($text, "<span")){
-                                            if(strlen($text) > 75)
-                                                $text = substr($text, 0, 75)."...";
+                                        $textSearch = "";
+                                        $containEmail = false;
+                                        $containGender = false;
+                                        $containType = false;
+                                        foreach($searchVal as $search){
+                                            if(str_contains(strtolower($email), strtolower($search))) $containEmail = true;
+                                            if(str_contains(strtolower($gender), strtolower($search))) $containGender = true;
+                                            if(str_contains(strtolower($type), strtolower($search))) $containType = true;
+                                            if(str_contains(strtolower($text), strtolower($search)) && $textSearch == ""){
+                                                $textSearch = $search;
+                                            }
                                         }
-                                        else{
-                                            $endOffset = stripos(substr($text, $textOffset), "</span>") + 7;
-                                            $text = ($textOffset > 0 ? "..." : "").substr($text, $textOffset, $endOffset)."...";
-                                        }
-                                        $genOffset = stripos($gender, "<span");
-                                        $emailOffset = stripos($email, "<span");
-                                        $typeOffset = stripos($type, "<span");
-                                        addListRow($senderName, $text.(!str_contains($gender, "<span") ? "": "<br>Gender search: $gender").(!str_contains($email, "<span") ? "": "<br>Email search: $email").(!str_contains($type, "<span") ? "": "<br>Feedback type search: $type"), $time, $id);
+                                        
+                                        $textOffset = max(stripos($text, $textSearch)-25, 0);
+                                        addListRow($senderName, [ "Feedback search: ".($textOffset > 0 ? "..." : "").substr($text, $textOffset, $feedbackDisplayLength).($textOffset + $feedbackDisplayLength < strlen($text) ? "..." : ""), $containEmail ? "Email search: ".$email : "", $containGender ? "Gender search: ".$gender : "", $containType ? "Feedback type: ".$type : "" ], $time, $id, $searchVal);
                                     }
                                 }
                                 break;
@@ -479,7 +477,7 @@ function logOut(){
                                         $row = $fetched[$i];
                                         $secretKey = $row[1];
                                         $id = intval($row[0]);
-                                        addListRow($id, $secretKey, "", $id);
+                                        addListRow($id, [ $secretKey ], "", $id);
                                     }
                                 } else{
                                     $searchVal = explode(" ", $_GET["search"]);
@@ -499,13 +497,8 @@ function logOut(){
                                         $row = $fetched[$i];
                                         $secretKey = $row[1];
                                         $idDisplay = $row[0];
-                                        foreach($searchVal as $search){
-                                            $search = preg_quote($search, '/');
-                                            $secretKey = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $secretKey);
-                                            $idDisplay = preg_replace("/($search)/i", "<span class=\"search-result\">$1</span>", $idDisplay);
-                                        }
                                         $id = intval($row[0]);
-                                        addListRow($idDisplay, $secretKey, "", $id);
+                                        addListRow($idDisplay, [ $secretKey ], "", $id, $searchVal);
                                     }
                                 }
                                 break;

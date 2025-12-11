@@ -6,8 +6,12 @@
     transition: all 0.5s ease;
 }
 
-body{
-    color: whitesmoke;
+body {
+    border: 2px double rgba(0, 180, 180, 0.6);
+    min-height: 50vh;
+    background: linear-gradient(135deg, #010103, #0a0f59);
+    padding-bottom: 95px;
+    color: white;
 }
 
 #logo:hover{
@@ -125,7 +129,7 @@ input[type="submit"]:hover {
     display: none;
     position: absolute;
     background: #1f2937;
-    min-width: 150px;
+    min-width: 110px;
     border-radius: 6px;
     padding: 5px 0;
     top: 35px;
