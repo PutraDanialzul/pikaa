@@ -121,7 +121,7 @@
         <span class="current-page-info">Current Page: <?php echo $currentPage; ?></span>
         <div class="pagination-controls">
             <?php for($x = 1; $x <= $pageCount; $x++){ ?>
-            <a href="index?<?php if(isset($_GET["search"])) echo "search=".$_GET["search"]."&"; ?>page=<?php echo $x; ?>"><?php echo $x; ?></a>
+            <a href="index?<?php if(isset($_GET["search"])) echo "search=".$_GET["search"]."&"; ?>page=<?php echo $x > 5 ? $songCount-(10-$x) : $x; ?>"><?php echo $x > 5 ? $songCount-(10-$x) : $x; ?></a>
             <?php } ?>
             <form method="GET" action="index">
                 <?php if(isset($_GET["search"])){ ?>
