@@ -22,9 +22,7 @@
 		<div id="main-logo-container">
 			<img src="/media/pikaa.png" alt="PIKAA logo">
 		</div>
-		<a href="/songs/" id="go-to-list-button">
-			Choose a song
-		</a>
+		<a href="/songs/index" id="go-to-list-button">Choose a song</a>
 		<?php
         require $_SERVER['DOCUMENT_ROOT']."/dbInfo.php";
         $connection = new mysqli($dbServername, $dbUsername, $dbPassword, $dbName);

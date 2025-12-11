@@ -397,7 +397,7 @@ function logOut(){
                                         $id = intval($row[3]);
                                         $lyricsSearch = "";
                                         foreach($searchVal as $search){
-                                            if(str_contains($lyrics, $search)){
+                                            if(str_contains(strtolower($lyrics), strtolower($search))){
                                                 $lyricsSearch = $search;
                                                 break;
                                             }

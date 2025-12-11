@@ -55,7 +55,7 @@ animation: fadeIn 1.2s ease;
     color: #a7d8f0;
 }
 
-input[type="text"] {
+input[type="text"], input[type="number"] {
     padding: 10px 14px;
     border-radius: 6px;
     border: 1px solid #444;
@@ -66,7 +66,7 @@ input[type="text"] {
     transition: border 0.2s ease;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="number"]:focus {
     border-color: #6ec7f5;
     outline: none;
 }
@@ -131,7 +131,7 @@ input[type="text"]:focus {
 }
 
 .song-card {
-    background-color: #151515;
+    background-color: #06183e;
     padding: 15px;
     width: 230px;
     border-radius: 12px;
@@ -158,11 +158,6 @@ input[type="text"]:focus {
     opacity: 0.8;
 }
 
-.genre-text {
-    font-size: 13px;
-    opacity: 0.6;
-}
-
 /* ---------- PAGINATION ---------- */
 .pagination {
     margin: 40px 0;
@@ -181,7 +176,7 @@ input[type="text"]:focus {
     gap: 10px;
 }
 
-.pagination-controls button {
+.pagination-controls a, #page-selection-button {
     padding: 8px 12px;
     background-color: #333;
     border: 1px solid #444;
@@ -190,11 +185,11 @@ input[type="text"]:focus {
     cursor: pointer;
 }
 
-.pagination-controls button:hover {
+.pagination-controls a:hover , #page-selection-button:hover{
     background-color: #444;
 }
 
-.pagination-controls input {
+.pagination-controls form input {
     width: 60px;
     text-align: center;
 }
@@ -236,4 +231,39 @@ input[type="text"]:focus {
     .song-card {
         width: 90%;
     }
+}
+
+.search-result{
+    background-color: red;
+    color: black;
+}
+
+#search-keywords-container{
+    display: flex;
+    width: fit-content;
+    text-align: center;
+    border: 1px solid #ffffff3b;
+    padding: 0px 10px;
+    border-radius: 6px;
+    margin: 0px auto;
+    background-color: #ffffff1f;
+}
+
+#search-keywords-container p{
+    display: block;
+}
+
+#search-keywords-container a{
+    display: block;
+    margin: auto auto;
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid rgba(245, 245, 245, 0.24);
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.063);
+    border-radius: 6px;
+}
+#search-keywords-container a:hover {
+    background-color: #42a5f5;
 }
