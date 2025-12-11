@@ -55,7 +55,7 @@
     <div class="search-section">
         <?php if(isset($_GET["search"])) { ?>
         <div id="search-keywords-container">
-            <p>Search Keywords: <?php foreach($searchKeywords as $key => $keyword){ echo "<span>$keyword</span>"; if(isset($searchKeywords[$key+1])) echo " "; } ?></p><a href="index">Reset</a>
+            <p>Search Keywords: <?php foreach($searchKeywords as $key => $keyword){ echo "<span class=\"search-result\">$keyword</span>"; if(isset($searchKeywords[$key+1])) echo " "; } ?></p><a href="index">Reset</a>
         </div>
         <?php } ?>
         <form class="bar-container center-bar" method="GET" action="index">
