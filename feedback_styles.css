@@ -187,3 +187,12 @@ body {
 .footer a {
     color: #64b5f6;
 }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-10px); }
+    to { opacity: 1; transform: translate(0); }
+}
+
+body *{
+    animation: fadeIn 0.8s ease;
+}
