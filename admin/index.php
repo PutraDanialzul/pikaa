@@ -314,14 +314,18 @@ function logOut(){
             <?php if(isset($_GET["view"])){ ?>
                 <?php if(!isset($_GET["id"]) && !isset($_GET["action"])){ ?>
                     <div id="section-list-container">
-                        <?php function addListRow(string $title, string $description, string $rightInformation, int $id){ ?>
+                        <?php function addListRow(string $title, string $description, string $rightInformation, int $id, string $searchKeyword = ""){ ?>
                         <div class="list-item">
                             <div class="list-item-left">
+                                <?php if($searchKeyword == ""){ ?>
                                 <h3><?php echo $title; ?></h3>
                                 <p><?php echo $description; ?></p>
+                                <?php } ?>
                             </div>
                             <div class="list-item-right">
+                                <?php if($searchKeyword == ""){ ?>
                                 <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
+                                <?php } ?>
                                 <form method="GET">
                                     <input type="hidden" name="view" value="<?php echo $_GET["view"]; ?>">
                                     <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -334,7 +338,7 @@ function logOut(){
                         <div class="list-item">
                             <div class="list-item-left">
                                 <h3><?php echo $title; ?></h3>
-                                <p><?php echo $description; ?></p>
+                                <p><?php echo substr($description, 0, 30); ?></p>
                             </div>
                             <div class="list-item-right">
                                 <span class="list-item-right-info"><?php echo $rightInformation; ?></span>

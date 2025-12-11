@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 03, 2025 at 03:18 AM
+-- Generation Time: Dec 10, 2025 at 03:47 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -32,14 +32,15 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `ADMIN_SECRET` text NOT NULL COMMENT 'The secret code for each admin.',
   `SECRET_ID` int UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`SECRET_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='The secret code for each admin.';
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='The secret code for each admin.';
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`ADMIN_SECRET`, `SECRET_ID`) VALUES
-('abc', 2);
+('abc', 2),
+('def', 9);
 
 -- --------------------------------------------------------
 
@@ -57,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `FEEDBACK_TEXT` longtext NOT NULL COMMENT 'The feedback being sent. ',
   `FEEDBACK_TIME` text NOT NULL COMMENT 'The information about the time the feedback being sent. ',
   PRIMARY KEY (`FEEDBACK_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='The data about each feedback. ';
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='The data about each feedback. ';
 
 --
 -- Dumping data for table `feedback`
@@ -85,14 +86,14 @@ CREATE TABLE IF NOT EXISTS `song` (
   `SONG_VIDEO_URL` text NOT NULL COMMENT 'The link to the song music video.',
   `SONG_MUSICS_URL` text NOT NULL COMMENT 'The link to the song music sound.',
   PRIMARY KEY (`SONG_ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='The information about each song';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='The information about each song';
 
 --
 -- Dumping data for table `song`
 --
 
 INSERT INTO `song` (`SONG_ID`, `SONG_TITLE`, `SONG_GENRE`, `SONG_ARTIST`, `SONG_RELEASE_YEAR`, `SONG_LYRICS`, `SONG_COVER_URL`, `SONG_VIDEO_URL`, `SONG_MUSICS_URL`) VALUES
-(4, 'Never Gonna Give You Up', 'dance-pop', 'Rick Astley', 1897, 'We\'re no strangers to love\r\nYou know the rules and so do I\r\nA full commitment\'s what I\'m thinking of\r\nYou wouldn\'t get this from any other guy\r\n\r\nI just wanna tell you how I\'m feeling\r\nGotta make you understand\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nWe\'ve known each other for so long\r\nYour heart\'s been aching, but you\'re too shy to say it\r\nInside, we both know what\'s been going on\r\nWe know the game and we\'re gonna play it\r\n\r\nAnd if you ask me how I\'m feeling\r\nDon\'t tell me you\'re too blind to see\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\n(Ooh, give you up)\r\n(Ooh, give you up)\r\nNever gonna give, never gonna give\r\n(Give you up)\r\nNever gonna give, never gonna give\r\n(Give you up)\r\n\r\nWe\'ve known each other for so long\r\nYour heart\'s been aching, but you\'re too shy to say it\r\nInside, we both know what\'s been going on\r\nWe know the game and we\'re gonna play it\r\n\r\nI just wanna tell you how I\'m feeling\r\nGotta make you understand\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you', 'https://cdn.gigwise.com/wp-content/uploads/2025/01/rickroll-2.jpg', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator&theme=0');
+(4, 'Never Gonna Give You Up', 'dance-pop', 'Rick Astley', 1897, 'We\'re no strangers to love\r\nYou know the rules and so do I\r\nA full commitment\'s what I\'m thinking of\r\nYou wouldn\'t get this from any other guy\r\n\r\nI just wanna tell you how I\'m feeling\r\nGotta make you understand\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nWe\'ve known each other for so long\r\nYour heart\'s been aching, but you\'re too shy to say it\r\nInside, we both know what\'s been going on\r\nWe know the game and we\'re gonna play it\r\n\r\nAnd if you ask me how I\'m feeling\r\nDon\'t tell me you\'re too blind to see\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\n(Ooh, give you up)\r\n(Ooh, give you up)\r\nNever gonna give, never gonna give\r\n(Give you up)\r\nNever gonna give, never gonna give\r\n(Give you up)\r\n\r\nWe\'ve known each other for so long\r\nYour heart\'s been aching, but you\'re too shy to say it\r\nInside, we both know what\'s been going on\r\nWe know the game and we\'re gonna play it\r\n\r\nI just wanna tell you how I\'m feeling\r\nGotta make you understand\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you\r\n\r\nNever gonna give you up\r\nNever gonna let you down\r\nNever gonna run around and desert you\r\nNever gonna make you cry\r\nNever gonna say goodbye\r\nNever gonna tell a lie and hurt you', 'https://upload.wikimedia.org/wikipedia/en/3/34/RickAstleyNeverGonnaGiveYouUp7InchSingleCover.jpg', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator&theme=0');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

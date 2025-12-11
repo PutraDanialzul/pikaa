@@ -1,0 +1,172 @@
+body {
+    border: 2px double rgb(5, 100, 100);
+    min-height: 50vh;
+    background: linear-gradient(135deg, #010103, #010343);
+    font-family: "Segoe UI", sans-serif;
+    padding-bottom: 95px;
+    color: #f2f2f2;
+}
+
+.center-img {
+    display: block;
+    margin: 20px auto;
+    transition: 0.5s ease;
+}
+
+.center-img:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.title {
+    text-align: center;
+    color: #00e6e6;
+    margin-top: 10px;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #9b70ff; 
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.feedback-form {
+    max-width: 500px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 18px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #d4d4d4;
+}
+
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form select,
+.feedback-form textarea {
+    width: 100%;
+    padding: 11px 0px;
+    border: 1px solid #0c6262;
+    background: rgba(0,0,0,0.4);
+    color: #e0ffff;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    transition: 0.25s;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus,
+.feedback-form select:focus {
+    border-color: #00e6e6;
+    box-shadow: 0 0 6px #00e6e6;
+    background: rgba(255,255,255,0.08);
+}
+
+.feedback-form input::placeholder,
+.feedback-form textarea::placeholder {
+    padding-left: 10px;
+}
+
+.feedback-form option[value="suggestion"],
+.feedback-form option[value="complaint"],
+.feedback-form option[value="enquiry"] {
+    background-color: white;
+    color: black;
+}
+
+.gender-options {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid rgba(0,255,255,0.3);
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    margin-bottom: 20px;
+}
+
+.card legend {
+    font-weight: bold;
+    padding: 0 8px;
+    color: #00e6e6;
+}
+
+#submitButton,
+#backButton {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#submitButton {
+    background: #00b3b3;
+    color: white;
+}
+
+#submitButton:hover {
+    background: #009999;
+}
+
+#backButton {
+    background: #6842ff;
+    color: white;
+}
+
+#backButton:hover {
+    background: #5330d9;
+}
+
+.feedback-form a {
+    text-decoration: none;
+}
+
+#feedback{
+    resize: none;
+}
+
+#success-banner {
+    width: 100%;
+    padding: 18px 0;
+    background: linear-gradient(135deg, #00b400, #2d792d);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 0px black, 1px -1px 0px black, -1px -1px 0px black, -1px 1px 0px black, 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black, 0px -1px 0px black;
+    animation: slideDown 1s ease;
+}
+
+#fail-banner {
+    width: 100%;
+    padding: 18px 0;
+    background: linear-gradient(135deg, #b40000, #792d2d);
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    text-shadow: 1px 1px 0px black, 1px -1px 0px black, -1px -1px 0px black, -1px 1px 0px black, 1px 0px 0px black, -1px 0px 0px black, 0px 1px 0px black, 0px -1px 0px black;
+    animation: slideDown 1s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20%); opacity: 0.0; }
+    to { transform: translateY(0); opacity:1.0; }
+}

@@ -1,50 +1,118 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Song Info</title>
 
-<html>
-    <head>
-      <style>
-         .info {
-             text-align:center;
-             color : #FF1493 ;
-             
-         }
-         .center-table {
-             margin-left: auto;
-             margin-right: auto;
-             margin-top:56px ;
-             margin-bottom: 60px;
-         }    
-         
+    <!-- CSS -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-      </style>
-        <link rel="stylesheet" href="/styles.css">
-        <title>PIKAA - Songs List</title>
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-        <meta http-equiv="Pragma" content="no-cache">
-        <meta http-equiv="Expires" content="0">
-    </head>
-    <body style="text-align: center;">
+<body>
 
-        <h1>
-            <a href="/"> 
-                <img src="/media/pikaa.png" alt="PIKAA home" width=200 class="logo"></a>
-        </h1>
-        <h2>
-            Our Ultimate Song List!
-        </h2>
+    <!-- Header Logo -->
+    <a href="/" class="logo-link">
+        <img src="/media/pikaa.png" alt="PIKAA Logo" id="logo">
+    </a>
 
-    <table class="center-table" id="song-table" border="1" width="80%" >
-            <tr>
-               <th colspan ="3"> Top Streaming  </th>
-            </tr>
-            <tr>
-               <th><b>Song Name</b></th><th><b>Genre</b></th><th><b>Language</b> </th>
-            </tr>
-            
+    <!-- Search Bars Section -->
+    <div class="search-section">
+        <div class="bar-container">
+            <label for="genre-bar" class="bar-label">Genre:</label>
+            <input id="genre-bar" name="genre" type="text" placeholder="Search...">
+        </div>
 
-    </table>
-        <a href="/" class="links">Go Back</a>
+        <div class="bar-container">
+            <label for="tag-bar" class="bar-label">Tags:</label>
+            <input id="tag-bar" name="tag" type="text" placeholder="Search...">
+            <button class="button-bar" type="button">Add</button>
+        </div>
 
-        <script src="song-listing.js"></script>
-    </body>
+        <div class="bar-container center-bar">
+            <input id="search-bar" name="search" type="text" placeholder="Search Song...">
+            <button class="button-bar" type="button">Search</button>
+        </div>
+    </div>
+
+    <h3 class="section-title">OUR ULTIMATE SONG CHOICES</h3>
+
+    <!-- Song Grid 1 -->
+    <div class="song-grid">
+        <div class="song-card">
+            <a href="/songs/info?q=the_world_is_ugly-my_chemical_romance">
+                <img src="mcralbum.jpg" alt="Album Art">
+                <h4>The World is Ugly</h4>
+                <p>My Chemical Romance</p>
+                <p class="genre-text">Alternative Rock, Emo</p>
+            </a>
+        </div>
+
+        <div class="song-card">
+            <a href="/songs/info?q=bohemian_rhapsody-queen">
+                <img src="bohemian.jpg" alt="Album Art">
+                <h4>Bohemian Rhapsody</h4>
+                <p>Queen</p>
+                <p class="genre-text">Rock</p>
+            </a>
+        </div>
+
+        <div class="song-card">
+            <a href="/songs/info?q=never_gonna_give_you_up-rick_astley">
+                <img src="" alt="Rick Astley">
+                <h4>Never Gonna Give You Up</h4>
+                <p>Rick Astley</p>
+                <p class="genre-text">Pop</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Song Grid 2 -->
+    <div class="song-grid">
+        <div class="song-card">
+            <a href="/songs/info?q=ingat-alyph">
+                <img src="ingat.jpg" alt="Album Art">
+                <h4>Ingat</h4>
+                <p>Alyph</p>
+                <p class="genre-text">Hip-Hop, Rap</p>
+            </a>
+        </div>
+
+        <div class="song-card">
+            <a href="/songs/info?q=jane_doe-kenshi_yonezu">
+                <img src="janedoe.jpg" alt="Album Art">
+                <h4>Jane Doe</h4>
+                <p>Kenshi Yonezu & Hikari Utada</p>
+                <p class="genre-text">J-Pop, Jazz</p>
+            </a>
+        </div>
+
+        <div class="song-card">
+            <a href="/songs/info?q=dealova-once_mekel">
+                <img src="dealova.jpg" alt="Dealova Album Art">
+                <h4>Dealova</h4>
+                <p>Once Mekel</p>
+                <p class="genre-text">Pop, Rock</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="current-page-info">Current Page: 1</span>
+        <div class="pagination-controls">
+            <button>1</button>
+            <input type="text" placeholder="Page">
+            <button>Go</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 PIKAA. All rights reserved.</p>
+        <p class="powered">⚙️ Powered by <a href="https://github.com">github.com</a></p>
+    </footer>
+
+</body>
 </html>
