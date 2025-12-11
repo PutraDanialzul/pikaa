@@ -29,7 +29,7 @@
         if($connection->connect_error){
             die("Error: Connection failed. ".$connection->connect_error);
         }else{
-        	$query = "SELECT `SONG_COVER_URL`, `SONG_TITLE` FROM `song`;";
+        	$query = "SELECT `SONG_COVER_URL`, `SONG_TITLE`, `SONG_ID` FROM `song`;";
         	$result = $connection->query($query);
         	if(!$result){
             	die("Error: Select query failed. ".$connection->error);
@@ -37,15 +37,15 @@
         	else if($result->num_rows > 0){
         		$fetchedData = $result->fetch_all();
 		?>
-		<?php function addSongContainer($imgSource, $songTitle){ ?>
-			<div class="song-container">
+		<?php function addSongContainer($imgSource, $songTitle, $id){ ?>
+			<a href="/songs/info?id=<?php echo $id; ?>" class="song-container">
 				<img src="<?php echo $imgSource; ?>" alt="<?php echo $songTitle; ?>">
-			</div>
+			</a>
 		<?php } ?>
 		<div class="song-list-row">
 			<?php
 			for($x = 0; $x < min(3, $result->num_rows); $x++){
-				addSongContainer($fetchedData[$x][0], $fetchedData[$x][1]);
+				addSongContainer($fetchedData[$x][0], $fetchedData[$x][1], $fetchedData[$x][2]);
 			}
 			?>
 		</div>
@@ -55,7 +55,7 @@
 		<div class="song-list-row">
 			<?php
 			for($x = 3; $x < min(6, $result->num_rows); $x++){
-				addSongContainer($fetchedData[$x][0], $fetchedData[$x][1]);
+				addSongContainer($fetchedData[$x][0], $fetchedData[$x][1], $fetchedData[$x][2]);
 			}
 			?>
 		</div>
@@ -67,7 +67,7 @@
 		?>
     	<footer class="footer">
     	    <p>© 2025 PIKAA. All rights reserved.</p>
-    	    <p style="opacity: 0.6;"> ⚙️Powered by <a href="https://github.com">github.com</a></p>
+    	    <p class="powered">⚙️ Powered by <a href="https://github.com">github.com</a></p>
     	</footer>
 	</body>
 </html>

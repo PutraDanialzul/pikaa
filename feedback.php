@@ -104,6 +104,9 @@
             <input id="backButton" type="button" value="Go Back">
         </a>
     </form>
-
+    <footer class="footer">
+        <p>© 2025 PIKAA. All rights reserved.</p>
+        <p class="powered">⚙️ Powered by <a href="https://github.com">github.com</a></p>
+    </footer>
 </body>
 </html>

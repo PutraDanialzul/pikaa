@@ -3,7 +3,6 @@ body {
     min-height: 50vh;
     background: linear-gradient(135deg, #010103, #010343);
     font-family: "Segoe UI", sans-serif;
-    padding-bottom: 95px;
     color: #f2f2f2;
 }
 
@@ -169,4 +168,22 @@ body {
 @keyframes slideDown {
     from { transform: translateY(-20%); opacity: 0.0; }
     to { transform: translateY(0); opacity:1.0; }
+}
+
+.footer {
+    margin-top: 50px;
+    padding: 25px 0;
+    color: #ccc;
+    font-size: 14px;
+    background-color: #0d0d0d;
+    border-top: 1px solid #222;
+    text-align: center;
+}
+
+.footer .powered {
+    opacity: 0.6;
+}
+
+.footer a {
+    color: #64b5f6;
 }
