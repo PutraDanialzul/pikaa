@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,8 +85,8 @@
         <fieldset class="card">
             <legend>Feedback Details</legend>
 
-            <label>Type of Feedback: <span style="color:red;">*</span></label>
-            <select name="type_of_feedback" required>
+            <label for="type_of_feedback">Type of Feedback: <span style="color:red;">*</span></label>
+            <select id="type_of_feedback" name="type_of_feedback" required>
                 <option value="suggestion">Suggestion</option>
                 <option value="complaint">Complaint</option>
                 <option value="enquiry">Enquiry</option>

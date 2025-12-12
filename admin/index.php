@@ -342,7 +342,7 @@ function logOut(){
                         <div class="list-item">
                             <div class="list-item-left">
                                 <h3><?php echo $title; ?></h3>
-                                <p><?php echo substr($description, 0, 30); ?></p>
+                                <p><?php echo $description; ?></p>
                             </div>
                             <div class="list-item-right">
                                 <span class="list-item-right-info"><?php echo $rightInformation; ?></span>
