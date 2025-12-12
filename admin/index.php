@@ -81,6 +81,7 @@ function logOut(){
                 else switch($_POST["objectType"]){
                     case "songs":
                         $tableName = "song";
+                        $id = $_POST["id"];
                         $title = $_POST["Title"];
                         $genre = $_POST["Genre"];
                         $artist = $_POST["Artist"];
@@ -89,18 +90,21 @@ function logOut(){
                         $coverUrl = $_POST["Cover_URL"];
                         $ytEmbedUrl = $_POST["Youtube_Embed_URL"];
                         $spotifyEmbedUrl = $_POST["Spotify_Embed_URL"];
-                        $data = [
-                            "SONG_TITLE" => $title,
-                            "SONG_GENRE" => $genre,
-                            "SONG_ARTIST" => $artist,
-                            "SONG_RELEASE_YEAR" => $releaseYear,
-                            "SONG_LYRICS" => $lyrics,
-                            "SONG_COVER_URL" => $coverUrl,
-                            "SONG_VIDEO_URL" => $ytEmbedUrl,
-                            "SONG_MUSICS_URL" => $spotifyEmbedUrl
-                        ];
                         switch($_POST["action"]){
                             case "edit":
+                                $searchQuery = "SELECT `SONG_TITLE`, `SONG_GENRE`, `SONG_ARTIST`, `SONG_RELEASE_YEAR`, `SONG_LYRICS`, `SONG_COVER_URL`, `SONG_VIDEO_URL`, `SONG_MUSICS_URL` FROM `$tableName` WHERE `SONG_ID`=$id;";
+                                $queryResult = $connection->query($searchQuery);
+                                $prevData = $queryResult->fetch_all()[0];
+                                $data = [
+                                    "SONG_TITLE" => $title != "" ? $title : $prevData[0],
+                                    "SONG_GENRE" => $genre != "" ? $genre : $prevData[1],
+                                    "SONG_ARTIST" => $artist != "" ? $artist : $prevData[2],
+                                    "SONG_RELEASE_YEAR" => $releaseYear != "" ? $releaseYear : $prevData[3],
+                                    "SONG_LYRICS" => $lyrics != "" ? $lyrics : $prevData[4],
+                                    "SONG_COVER_URL" => $coverUrl != "" ? $coverUrl : $prevData[5],
+                                    "SONG_VIDEO_URL" => $ytEmbedUrl != "" ? $ytEmbedUrl : $prevData[6],
+                                    "SONG_MUSICS_URL" => $spotifyEmbedUrl != "" ? $spotifyEmbedUrl : $prevData[7]
+                                ];
                                 $query = "UPDATE `$tableName` SET";
                                 $updateBefore = false;
                                 foreach($data as $key => $val){
@@ -112,6 +116,16 @@ function logOut(){
                                 $query .= " WHERE SONG_ID = ".$_POST["id"].";";
                                 break;
                             case "create":
+                                $data = [
+                                    "SONG_TITLE" => $title,
+                                    "SONG_GENRE" => $genre,
+                                    "SONG_ARTIST" => $artist,
+                                    "SONG_RELEASE_YEAR" => $releaseYear,
+                                    "SONG_LYRICS" => $lyrics,
+                                    "SONG_COVER_URL" => $coverUrl,
+                                    "SONG_VIDEO_URL" => $ytEmbedUrl,
+                                    "SONG_MUSICS_URL" => $spotifyEmbedUrl
+                                ];
                                 $query = "INSERT INTO `$tableName` (";
                                 $addedBefore = false;
                                 foreach($data as $key => $val){
@@ -152,7 +166,7 @@ function logOut(){
                                     $editError = "Cannot edit current secret key!";
                                     break;
                                 }
-                                $query = "UPDATE `$tableName` SET `ADMIN_SECRET` = '".str_replace("'", "''", $newSecret)."' WHERE `SECRET_ID` = '".$_POST["id"]."';";
+                                $query = "UPDATE `$tableName` SET `ADMIN_SECRET` = '".str_replace("'", "''", $newSecret != "" ? $newSecret : $previousKey)."' WHERE `SECRET_ID` = '".$_POST["id"]."';";
                                 break;
                             case "create":
                                 $searchQuery = "SELECT ADMIN_SECRET FROM `$tableName` WHERE ADMIN_SECRET = '".str_replace("'", "''", $newSecret)."';";
