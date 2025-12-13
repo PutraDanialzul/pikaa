@@ -29,7 +29,7 @@
         if($connection->connect_error){
             die("Error: Connection failed. ".$connection->connect_error);
         }else{
-        	$query = "SELECT `SONG_COVER_URL`, `SONG_TITLE`, `SONG_ID` FROM `song`;";
+        	$query = "SELECT `SONG_COVER_URL`, `SONG_TITLE`, `SONG_ID` FROM `song` LIMIT  6;";
         	$result = $connection->query($query);
         	if(!$result){
             	die("Error: Select query failed. ".$connection->error);

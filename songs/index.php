@@ -40,7 +40,8 @@
                 $notFirst = true;
             }
         }
-        $query .= ";";
+        $offset = ($currentPage-1) * 6;
+        $query .= " LIMIT 6 OFFSET $offset;";
     	$result = $connection->query($query);
     	if(!$result){
         	die("Error: Select query failed. ".$connection->error);
@@ -48,7 +49,8 @@
     	else{
             $songCount = $result->num_rows;
     		$fetchedData = $result->fetch_all();
-            $pageCount = ceil($songCount/6);
+            $totalSongCount = $connection->query("SELECT COUNT(`SONG_ID`) FROM `song`;")->fetch_all()[0][0];
+            $pageCount = ceil($totalSongCount/6);
 	?>
 
     <!-- Search Bars Section -->
@@ -89,7 +91,7 @@
     <!-- Song Grid 1 -->
     <div class="song-grid">
         <?php
-        for($i = ($currentPage-1)*6; $i < min($songCount, ($currentPage-1)*6 + 3); $i++){
+        for($i = 0; $i < min($songCount, 3); $i++){
             $searchContainsLyrics = false;
             $displayLyricsOffset = 0;
             $shownLyricsLength = 20;
@@ -110,8 +112,20 @@
     <!-- Song Grid 2 -->
     <div class="song-grid">
         <?php
-        for($i = ($currentPage-1)*6 + 3; $i < min($songCount, ($currentPage-1)*6 + 6); $i++){
-            createSongCard($fetchedData[$i][0], $fetchedData[$i][4], $fetchedData[$i][1], [ $fetchedData[$i][3], $fetchedData[$i][2] ], $searchKeywords);
+        for($i = 3; $i < min($songCount, 6); $i++){
+            $searchContainsLyrics = false;
+            $displayLyricsOffset = 0;
+            $shownLyricsLength = 20;
+            if(isset($_GET["search"])){
+                foreach($searchKeywords as $searchKey){
+                    if(str_contains(strtolower($fetchedData[$i][5]), strtolower($searchKey))){
+                        $searchContainsLyrics = true;
+                        $displayLyricsOffset = max(stripos(strtolower($fetchedData[$i][5]), strtolower($searchKey))-($shownLyricsLength/2), 0);
+                        break;
+                    }
+                }
+            }
+            createSongCard($fetchedData[$i][0], $fetchedData[$i][4], $fetchedData[$i][1], [ $fetchedData[$i][3], $fetchedData[$i][2], $searchContainsLyrics ? (($displayLyricsOffset > 0 ? "..." : "").substr($fetchedData[$i][5], $displayLyricsOffset, min($shownLyricsLength, strlen($fetchedData[$i][5]))).($displayLyricsOffset+$shownLyricsLength < strlen($fetchedData[$i][5]) ? "..." : "")) : "" ], $searchKeywords);
         }
         ?>
     </div>
@@ -121,7 +135,7 @@
         <span class="current-page-info">Current Page: <?php echo $currentPage; ?></span>
         <div class="pagination-controls">
             <?php for($x = 1; $x <= $pageCount; $x++){ ?>
-            <a href="index?<?php if(isset($_GET["search"])) echo "search=".$_GET["search"]."&"; ?>page=<?php echo $x > 5 ? $songCount-(10-$x) : $x; ?>"><?php echo $x > 5 ? $songCount-(10-$x) : $x; ?></a>
+            <a href="index?<?php if(isset($_GET["search"])) echo "search=".$_GET["search"]."&"; ?>page=<?php echo $x > 5 ? $pageCount-(10-$x) : $x; ?>"><?php echo $x > 5 ? $pageCount-(10-$x) : $x; ?></a>
             <?php } ?>
             <form method="GET" action="index">
                 <?php if(isset($_GET["search"])){ ?>
