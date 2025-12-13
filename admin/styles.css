@@ -10,7 +10,6 @@ body {
     border: 2px double rgba(0, 180, 180, 0.6);
     min-height: 50vh;
     background: linear-gradient(135deg, #010103, #0a0f59);
-    padding-bottom: 95px;
     color: white;
 }
 
@@ -449,4 +448,22 @@ input[type="submit"]:hover {
 
 body *{
     animation: fadeIn 0.8s ease;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 25px 0;
+    color: #ccc;
+    font-size: 14px;
+    background-color: #0d0d0d;
+    border-top: 1px solid #222;
+}
+
+.footer .powered {
+    opacity: 0.6;
+}
+
+.footer a {
+    color: #64b5f6;
 }

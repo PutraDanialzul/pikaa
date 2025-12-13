@@ -641,7 +641,7 @@ function logOut(){
             <?php } ?>
         </section>
         <?php if(isset($_GET["view"])){ ?>
-            <footer id="footer-pagination">
+            <div id="footer-pagination">
                 <?php if(!isset($_GET["id"])){ ?>
                 <p>Current Page: <?php echo isset($_GET["page"]) ? $_GET["page"] : 1; ?></p>
                 <?php } ?>
@@ -660,8 +660,12 @@ function logOut(){
                     <input id="page-input" type="number" name="page" min="1" max="<?php echo max(1, $pageCount) ?>" placeholder="Page" required>
                     <button id="page-submit-button" type="submit">Go</button>
                 </form>
-            </footer>
+            </div>
         <?php } ?>
+        <footer class="footer">
+            <p>© 2025 PIKAA. All rights reserved.</p>
+            <p class="powered">⚙️ Powered by <a href="https://github.com">github.com</a></p>
+        </footer>
     </body>
 </html>
 <?php
