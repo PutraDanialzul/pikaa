@@ -1,7 +1,5 @@
 /* Reset */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Arial, sans-serif;
 }
@@ -13,12 +11,18 @@ body {
 
 /* Header */
 .header {
+  display: block;
   text-align: center;
   padding: 25px;
 }
 
 .logo {
   max-width: 220px;
+  transition: all 0.5s ease;
+}
+
+.logo:hover{
+  transform: scale(1.1);
 }
 
 /* Container */
@@ -34,6 +38,7 @@ body {
   gap: 40px;
   align-items: center;
   margin-bottom: 50px;
+  justify-content: center;
 }
 
 .cover img {
@@ -79,18 +84,10 @@ body {
 /* Media */
 .media iframe {
   width: 100%;
-  height: 180px;
+  height: fit-content;
   margin-bottom: 20px;
   border-radius: 10px;
   border: none;
-}
-
-/* Footer */
-.footer {
-  margin-top: 60px;
-  text-align: center;
-  color: #666;
-  font-size: 0.9rem;
 }
 
 /* Responsive */
