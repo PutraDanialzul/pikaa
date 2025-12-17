@@ -81,7 +81,6 @@ function logOut(){
                 else switch($_POST["objectType"]){
                     case "songs":
                         $tableName = "song";
-                        $id = $_POST["id"];
                         $title = $_POST["Title"];
                         $genre = $_POST["Genre"];
                         $artist = $_POST["Artist"];
@@ -92,6 +91,7 @@ function logOut(){
                         $spotifyEmbedUrl = $_POST["Spotify_Embed_URL"];
                         switch($_POST["action"]){
                             case "edit":
+                                $id = $_POST["id"];
                                 $searchQuery = "SELECT `SONG_TITLE`, `SONG_GENRE`, `SONG_ARTIST`, `SONG_RELEASE_YEAR`, `SONG_LYRICS`, `SONG_COVER_URL`, `SONG_VIDEO_URL`, `SONG_MUSICS_URL` FROM `$tableName` WHERE `SONG_ID`=$id;";
                                 $queryResult = $connection->query($searchQuery);
                                 $prevData = $queryResult->fetch_all()[0];
@@ -272,7 +272,7 @@ function logOut(){
     <body onload="initializeTextArea();">
         <header id="topbar">
             <div id="logo-area">
-                <a href="/"><img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo"></a>
+                <a href="/admin/"><img id="logged-in-logo" src="/media/pikaa.png" alt="pikaa logo"></a>
             </div>
             <p><?php echo "Current secret key: <span style=\"background-color: green; padding: 0px 2px;\">".$current_secret."</span>" ?></p>
             <div id="topbar-actions">
