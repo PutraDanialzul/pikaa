@@ -2,51 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>PIKAA</title>
-  <link rel="stylesheet" href="/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIKAA — INGAT</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- Logo -->
-  <div class="logo-container">
-    <img src="/media/pikaa.png" width="350" alt="PIKAA">
-  </div>
+  <!-- Header -->
+  <header class="header">
+    <img src="/media/pikaa.jpg" alt="PIKAA Logo" class="logo">
+  </header>
 
-  <!-- Song Info Section -->
-  <div class="song-info">
-    <img 
-      src="https://i0.wp.com/ladybosz.com/wp-content/uploads/2025/01/The-Storm-alyph-1.jpg?fit=1080%2C1080&ssl=1" 
-      width="350" 
-      alt="Song Cover"
-      class="song-cover"
-    >
+  <main class="container">
 
-    <div class="song-details">
-      <p><strong>NAME</strong>: INGAT</p>
-      <p><strong>ARTIST</strong>: ALYPH</p>
-      <p><strong>RELEASED YEAR</strong>: 2025</p>
-    </div>
-  </div>
+    <!-- Top Section -->
+    <section class="top-section">
 
-  <!-- Lyrics + Media Section -->
-  <div class="content-section">
+      <!-- Album Cover -->
+      <div class="cover">
+        <img 
+          src="https://i0.wp.com/ladybosz.com/wp-content/uploads/2025/01/The-Storm-alyph-1.jpg?fit=1080%2C1080&ssl=1"
+          alt="INGAT Album Cover">
+      </div>
 
-    <div class="lyrics">
-      <h1>LYRICS</h1>
-      Kau kata kau nampak aku tengok dari jauh kau rasa terganggu<br>
-      Aku kata aku tak berani mengejar apa yang aku mahu<br>
-      Kau kata kau tak percaya aku boleh buat kau tunggu macam tu<br>
-      Aku ingat masa aku jatuh cinta denganmu<br>
-    </div>
+      <!-- Song Details -->
+      <div class="details">
+        <h1>INGAT</h1>
+        <p><span>Artist</span> ALYPH</p>
+        <p><span>Released</span> 2025</p>
+      </div>
 
-    <div class="media-embed">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
-      <iframe src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator&theme=0"></iframe>
-    </div>
+    </section>
 
-  </div>
+    <!-- Bottom Section -->
+    <section class="bottom-section">
+
+      <!-- Lyrics -->
+      <div class="lyrics">
+        <h2>Lyrics</h2>
+        <p>
+          Kau kata kau nampak aku tengok dari jauh kau rasa terganggu<br>
+          Aku kata aku tak berani mengejar apa yang aku mahu<br>
+          Kau kata kau tak percaya aku boleh buat kau tunggu macam tu<br>
+          Aku ingat masa aku jatuh cinta denganmu
+        </p>
+      </div>
+
+      <!-- Media -->
+      <div class="media">
+        <iframe 
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="YouTube player"
+          allowfullscreen>
+        </iframe>
+
+        <iframe 
+          src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC"
+          title="Spotify player"
+          allow="encrypted-media">
+        </iframe>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © 2025 PIKAA
+  </footer>
 
 </body>
 </html>

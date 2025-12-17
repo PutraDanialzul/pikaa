@@ -1,63 +1,106 @@
-/* BODY BACKGROUND (your code preserved) */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
 body {
-  border: 2px double rgb(5, 100, 100);
-  min-height: 50vh;
-  background: linear-gradient(135deg, #010103, #010343);
-  font-family: sans-serif;
-  padding-bottom: 95px;
-  color: white; /* makes text readable on dark bg */
+  background: #0e0e0e;
+  color: #eee;
 }
 
-/* LOGO */
-.logo-container {
+/* Header */
+.header {
   text-align: center;
-  padding: 25px 0;
+  padding: 25px;
 }
 
-/* SONG INFO SECTION (cover + details side-by-side) */
-.song-info {
+.logo {
+  max-width: 220px;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* Top Section */
+.top-section {
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  padding: 20px;
-  align-items: center;
-}
-
-.song-details p {
-  margin: 8px 0;
-  font-size: 18px;
-  letter-spacing: 1px;
-}
-
-/* MAIN CONTENT: Lyrics + Iframes side by side */
-.content-section {
-  display: flex;
-  justify-content: center;
   gap: 40px;
-  padding: 20px;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
-.lyrics {
-  max-width: 450px;
-  line-height: 1.6;
+.cover img {
+  width: 300px;
+  border-radius: 12px;
 }
 
-.lyrics h1 {
+.details h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.details p {
   margin-bottom: 10px;
-  font-size: 28px;
 }
 
-/* IFRAMES: stacked vertically */
-.media-embed {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.details span {
+  display: block;
+  font-size: 0.85rem;
+  color: #888;
+  text-transform: uppercase;
 }
 
-.media-embed iframe {
-  width: 350px;
-  height: 200px;
-  border: none;
+/* Bottom Section */
+.bottom-section {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+}
+
+/* Lyrics */
+.lyrics h2 {
+  margin-bottom: 15px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+.lyrics p {
+  white-space: pre-line;
+  color: #ccc;
+}
+
+/* Media */
+.media iframe {
+  width: 100%;
+  height: 180px;
+  margin-bottom: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  border: none;
+}
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .top-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bottom-section {
+    grid-template-columns: 1fr;
+  }
 }
